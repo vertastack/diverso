@@ -1,8 +1,28 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Phone, Mail, Facebook, Linkedin, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Facebook, Linkedin, MessageCircle, Menu, X, Home, ChevronDown } from 'lucide-react';
 
 const Header: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    // Prevent body scroll when menu is open
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+
   return (
     <header className="bg-white">
       {/* Top Bar */}
@@ -116,14 +136,175 @@ const Header: React.FC = () => {
               </Link>
             </nav>
 
-            {/* CTA Buttons */}
-            <div className="flex items-center gap-0">
+            {/* CTA Buttons - Desktop */}
+            <div className="hidden lg:flex items-center gap-0">
               <button className="bg-secondary text-white px-6 py-3 font-medium hover:bg-secondary-teal-dark transition-colors">
                 &gt;
               </button>
               <button className="bg-primary text-white px-6 py-3 font-medium hover:bg-primary-red-dark transition-colors">
                 ЦИТАТ
               </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              <Menu size={28} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/50"
+          onClick={closeMobileMenu}
+        />
+
+        {/* Menu Panel */}
+        <div
+          className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-neutral-dark shadow-xl overflow-y-auto transition-transform duration-300 ease-in-out ${
+            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {/* Close Button */}
+          <div className="flex justify-end p-4">
+            <button
+              onClick={closeMobileMenu}
+              className="p-2 text-white hover:text-primary transition-colors"
+              aria-label="Close menu"
+            >
+              <X size={28} />
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="px-6 py-4">
+            <Link
+              href="/"
+              onClick={closeMobileMenu}
+              className="flex items-center gap-3 text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              <Home size={20} />
+              <span>Начало</span>
+            </Link>
+
+            {/* Services with Dropdown */}
+            <div className="border-b border-white/10">
+              <button
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="flex items-center justify-between w-full text-white py-4 hover:text-primary transition-colors"
+              >
+                <span>Услуги</span>
+                <ChevronDown
+                  size={20}
+                  className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {isServicesOpen && (
+                <div className="pl-8 pb-4 space-y-2 animate-fadeIn">
+                  <Link
+                    href="/services/interior"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Интериорно боядисване
+                  </Link>
+                  <Link
+                    href="/services/exterior"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Външно боядисване
+                  </Link>
+                  <Link
+                    href="/services/glass"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Остъкляване
+                  </Link>
+                  <Link
+                    href="/services/restoration"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Ремонт на гипсена дърворезба
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/trading"
+              onClick={closeMobileMenu}
+              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              Търговски
+            </Link>
+
+            <Link
+              href="/references"
+              onClick={closeMobileMenu}
+              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              Референции
+            </Link>
+
+            <Link
+              href="/about"
+              onClick={closeMobileMenu}
+              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              За нас
+            </Link>
+
+            <Link
+              href="/free-place"
+              onClick={closeMobileMenu}
+              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              Свободно място
+            </Link>
+
+            <Link
+              href="/contact"
+              onClick={closeMobileMenu}
+              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
+            >
+              Контакт
+            </Link>
+          </nav>
+
+          {/* Contact Information */}
+          <div className="px-6 py-8 mt-auto">
+            <h3 className="text-white font-bold text-lg mb-4">Информация за контакт</h3>
+            <div className="space-y-2 text-white/90 text-sm">
+              <p>Extended Ooyerhoekseweg 16</p>
+              <p>7207 BJ Zutphen</p>
+              <a
+                href="tel:0575540147"
+                className="block hover:text-primary transition-colors"
+                onClick={closeMobileMenu}
+              >
+                0575 - 540 147
+              </a>
+              <a
+                href="mailto:info@rsschildersgroep.nl"
+                className="block hover:text-primary transition-colors"
+                onClick={closeMobileMenu}
+              >
+                info@rsschildersgroep.nl
+              </a>
             </div>
           </div>
         </div>

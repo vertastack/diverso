@@ -1,34 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Facebook, Linkedin, MessageCircle } from 'lucide-react';
+import { Facebook, Linkedin, MessageCircle } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-neutral text-white">
-      {/* CTA Section */}
-      <div className="bg-primary py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h3 className="text-xl font-semibold mb-1">Любопитни ли сте за възможностите?</h3>
-              <p className="text-white/90">Не се колебайте да се свържете с нас.</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <a 
-                href="tel:0575540147" 
-                className="flex items-center gap-2 bg-white text-primary px-6 py-3 font-semibold border-2 border-white hover:bg-transparent hover:text-white transition-colors"
-              >
-                <Phone size={20} />
-                <span>0575 - 540 147</span>
-              </a>
-              <button className="bg-secondary text-white px-8 py-3 font-semibold hover:bg-secondary-teal-dark transition-colors">
-                СВЪРЖЕТЕ СЕ С НАС
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="py-12">
         <div className="container mx-auto px-4">
