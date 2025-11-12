@@ -138,12 +138,12 @@ const Header: React.FC = () => {
 
             {/* CTA Buttons - Desktop */}
             <div className="hidden lg:flex items-center gap-0">
-              <button className="bg-secondary text-white px-6 py-3 font-medium hover:bg-secondary-teal-dark transition-colors">
+              <Link href="/contact" className="bg-secondary text-white px-6 py-3 font-medium hover:bg-secondary-teal-dark transition-colors inline-flex items-center justify-center">
                 &gt;
-              </button>
-              <button className="bg-primary text-white px-6 py-3 font-medium hover:bg-primary-red-dark transition-colors">
-                ЦИТАТ
-              </button>
+              </Link>
+              <Link href="/contact" className="bg-primary text-white px-6 py-3 font-medium hover:bg-primary-red-dark transition-colors inline-flex items-center justify-center">
+                Оферта
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}

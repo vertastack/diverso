@@ -2,7 +2,7 @@
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Mail } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -29,16 +29,14 @@ export default function ContactPage() {
     });
   };
 
-  const locations = [
-    { city: 'Зютфен', company: 'РС Шилдърсгроеп БВ', phone: '0575 - 540 147' },
-    { city: 'Ворден', company: 'Пейтърс Картини', phone: '0575 - 553 999' },
-    { city: 'Лохем', company: 'Соер Картини', phone: '0573 - 258 801' },
-    { city: 'Ворден', company: 'Картини на селски стол', phone: '0575 - 551 567' },
-    { city: 'Еефде', company: 'Картини на Лиебранд', phone: '0575 - 540 147' },
-    { city: 'Уорнсвелд', company: 'Училищни картини', phone: '0575 - 523 409' },
-    { city: 'Предна част', company: 'Картини на Ван Бошейде', phone: '0575 - 501 406' },
-    { city: 'Харло', company: 'Бояджийски работи Хасело', phone: '0545 - 261 246' },
-  ];
+  const location = {
+    city: 'Зютфен',
+    company: 'РС Шилдърсгроеп БВ',
+    phone: '0575 - 540 147',
+    address: 'Extended Ooyerhoekseweg 16',
+    postalCode: '7207 BJ Zutphen',
+    email: 'info@rsschildersgroep.nl'
+  };
 
   return (
     <>
@@ -223,43 +221,68 @@ export default function ContactPage() {
       {/* Red Separator Banner */}
       <section className="bg-primary py-2"></section>
 
-      {/* Locations Section */}
+      {/* Location Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {/* Left Column - Locations List */}
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Left Column - Location Info */}
+            <div>
               <p className="text-primary text-sm font-semibold uppercase mb-2">
-                МНОЖЕСТВО РАБОТНИ ЗОНИ И ЕДНО ПОСТОЯННО ЛИЦЕ ЗА КОНТАКТ
+                ЕДНО ПОСТОЯННО ЛИЦЕ ЗА КОНТАКТ
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6 uppercase">
-                НАШИТЕ ЛОКАЦИИ
+                НАШАТА ЛОКАЦИЯ
               </h2>
               <p className="text-gray-700 leading-relaxed mb-8">
-                Намерете нашите обслужвани райони и местоположения по-долу. RS Schildersgroep BV разшири обслужвания си район през годините чрез няколко придобивания на местоположенията, изброени по-долу. Екип от квалифицирани бояджии и единна точка за контакт. Продължаваме напред заедно.
+                Екип от квалифицирани бояджии и единна точка за контакт. Продължаваме напред заедно.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {locations.map((location, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <MapPin size={24} className="text-primary flex-shrink-0 mt-1" />
-                    <div className="flex-1">
-                      <h3 className="font-bold text-neutral-dark text-lg mb-1">{location.city}</h3>
-                      <p className="text-gray-600 text-sm mb-2">{location.company}</p>
-                      <a 
-                        href={`tel:${location.phone.replace(/\s/g, '')}`}
-                        className="text-primary hover:text-primary-red-dark transition-colors font-medium"
-                      >
-                        {location.phone}
-                      </a>
+              {/* Location Card */}
+              <div className="bg-gray-50 border-2 border-primary/20 rounded-lg p-8 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <MapPin size={32} className="text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-neutral-dark text-2xl mb-2">{location.city}</h3>
+                    <p className="text-gray-600 text-lg mb-4">{location.company}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <MapPin size={20} className="text-primary flex-shrink-0 mt-1" />
+                    <div>
+                      <p className="text-gray-700 font-medium">{location.address}</p>
+                      <p className="text-gray-700">{location.postalCode}</p>
                     </div>
                   </div>
-                ))}
+
+                  <div className="flex items-center gap-3">
+                    <Phone size={20} className="text-primary flex-shrink-0" />
+                    <a 
+                      href={`tel:${location.phone.replace(/\s/g, '')}`}
+                      className="text-primary hover:text-primary-red-dark transition-colors font-bold text-lg"
+                    >
+                      {location.phone}
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <Mail size={20} className="text-primary flex-shrink-0" />
+                    <a 
+                      href={`mailto:${location.email}`}
+                      className="text-primary hover:text-primary-red-dark transition-colors font-medium"
+                    >
+                      {location.email}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Right Column - Image with CTA */}
-            <div className="lg:col-span-1">
+            <div>
               <div className="relative h-full min-h-[500px] rounded-lg overflow-hidden">
                 {/* Background Image */}
                 <div 
