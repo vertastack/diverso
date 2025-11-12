@@ -96,7 +96,7 @@ const Header: React.FC = () => {
                 href="/" 
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
-                🏠
+                Начало
               </Link>
               <Link 
                 href="/services" 
@@ -123,12 +123,6 @@ const Header: React.FC = () => {
                 За нас
               </Link>
               <Link 
-                href="/free-place" 
-                className="text-gray-700 hover:text-primary transition-colors font-medium"
-              >
-                Свободно място
-              </Link>
-              <Link 
                 href="/contact" 
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
@@ -136,11 +130,8 @@ const Header: React.FC = () => {
               </Link>
             </nav>
 
-            {/* CTA Buttons - Desktop */}
-            <div className="hidden lg:flex items-center gap-0">
-              <Link href="/contact" className="bg-secondary text-white px-6 py-3 font-medium hover:bg-secondary-teal-dark transition-colors inline-flex items-center justify-center">
-                &gt;
-              </Link>
+            {/* CTA Button - Desktop */}
+            <div className="hidden lg:flex items-center">
               <Link href="/contact" className="bg-primary text-white px-6 py-3 font-medium hover:bg-primary-red-dark transition-colors inline-flex items-center justify-center">
                 Оферта
               </Link>
@@ -266,14 +257,6 @@ const Header: React.FC = () => {
               className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
             >
               За нас
-            </Link>
-
-            <Link
-              href="/free-place"
-              onClick={closeMobileMenu}
-              className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
-            >
-              Свободно място
             </Link>
 
             <Link
