@@ -1,52 +1,129 @@
-'use client';
+"use client";
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/app/shared/components/Header";
+import Footer from "@/app/shared/components/Footer";
 import { Phone, MapPin, Mail } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import SEO from "../shared/components/Seo";
+import StrapiService from "@/src/services/strapi.service";
+
+interface ContactData {
+  id: number;
+  metaTitle: string;
+  metaDescription: string;
+  metaImage?: {
+    url: string;
+  };
+  metaKeywords?: string;
+  metaRobots?: string;
+  metaUrl?: string;
+  headerQuote: string;
+  pageTitle: string;
+  pageDescription: string;
+  phoneText: string;
+  phoneNumber: string;
+  formTitle: string;
+  formSubtitle: string;
+  responseTime: string;
+  locationSectionTitle: string;
+  locationDescription: string;
+  companyInfo: {
+    city: string;
+    company: string;
+    phone: string;
+    address: string;
+    postalCode: string;
+    email: string;
+  };
+  ctaText: string;
+  ctaSubtext: string;
+}
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    street: '',
-    place: '',
-    workType: '',
-    message: ''
+    fullName: "",
+    email: "",
+    phone: "",
+    street: "",
+    place: "",
+    workType: "",
+    message: "",
   });
+
+  const [contactData, setContactData] = useState<ContactData | null>(null);
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const strapiService = new StrapiService();
+        const response = await strapiService.getContent<ContactData>(
+          "diverso/contact",
+          {
+            populate: {
+              metaImage: "*",
+              companyInfo: "*",
+            },
+          },
+        );
+        setContactData(response.data);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+
+    fetchContactData();
+  }, []);
+
+  if (!contactData) {
+    return (
+      <>
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <p className="text-gray-600">Няма данни за зареждане.</p>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  const seo = {
+    metaTitle: contactData.metaTitle,
+    metaDescription: contactData.metaDescription,
+    metaImage: contactData.metaImage || { url: "" },
+    metaKeywords: contactData.metaKeywords || "",
+    metaRobots: contactData.metaRobots || "index, follow",
+    metaUrl: contactData.metaUrl || "https://diverso.com",
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const location = {
-    city: 'Зютфен',
-    company: 'РС Шилдърсгроеп БВ',
-    phone: '0575 - 540 147',
-    address: 'Extended Ooyerhoekseweg 16',
-    postalCode: '7207 BJ Zutphen',
-    email: 'info@rsschildersgroep.nl'
-  };
+  const location = contactData.companyInfo;
 
   return (
     <>
+      <SEO seo={seo} />
       <Header />
-      
+
       {/* Red Header Banner */}
       <section className="bg-primary py-8">
         <div className="container mx-auto px-4">
           <p className="text-white text-center text-lg md:text-xl leading-relaxed">
-            Вашият специалист по боядисване, реставрация, ремонт на гниеща дървесина, довършителни работи по стени и остъкляване. Един единствен, всеотдаен партньор и лице за контакт: да вървим напред заедно.
+            {contactData.headerQuote}
           </p>
         </div>
       </section>
@@ -59,22 +136,24 @@ export default function ContactPage() {
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
               <div className="flex-1">
                 <h1 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">
-                  Свържете се с нас
+                  {contactData.pageTitle}
                 </h1>
                 <p className="text-gray-600 leading-relaxed">
-                  Любопитни ли сте за възможностите или искате да насрочите безплатна среща на място без обвързване? Оставете вашите данни и ние ще се свържем с вас.
+                  {contactData.pageDescription}
                 </p>
               </div>
               <div className="flex-shrink-0">
                 <div className="border-2 border-dashed border-primary px-6 py-4 inline-flex items-center gap-3">
                   <Phone size={24} className="text-primary" />
                   <div>
-                    <p className="text-primary font-bold text-lg">ОБАДЕТЕ НИ СЕ:</p>
-                    <a 
-                      href="tel:0575540147" 
+                    <p className="text-primary font-bold text-lg">
+                      {contactData.phoneText}
+                    </p>
+                    <a
+                      href={`tel:${contactData.phoneNumber.replace(/\s/g, "")}`}
                       className="text-neutral-dark font-bold text-xl hover:text-primary transition-colors"
                     >
-                      0575 - 540 147
+                      {contactData.phoneNumber}
                     </a>
                   </div>
                 </div>
@@ -86,7 +165,10 @@ export default function ContactPage() {
               {/* Row 1 */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Пълно име *
                   </label>
                   <input
@@ -101,7 +183,10 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Имейл *
                   </label>
                   <input
@@ -116,7 +201,10 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Телефонен номер *
                   </label>
                   <input
@@ -135,7 +223,10 @@ export default function ContactPage() {
               {/* Row 2 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="street"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Име на улица и номер на къща
                   </label>
                   <input
@@ -149,7 +240,10 @@ export default function ContactPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="place" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="place"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Име на място
                   </label>
                   <input
@@ -166,7 +260,10 @@ export default function ContactPage() {
 
               {/* Row 3 - Work Type */}
               <div>
-                <label htmlFor="workType" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="workType"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Type werkzaamheden
                 </label>
                 <select
@@ -187,7 +284,10 @@ export default function ContactPage() {
 
               {/* Message Textarea */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Съобщение
                 </label>
                 <textarea
@@ -207,10 +307,10 @@ export default function ContactPage() {
                   type="submit"
                   className="bg-primary hover:bg-primary-red-dark text-white px-10 py-4 font-semibold text-lg transition-colors uppercase w-full md:w-auto"
                 >
-                  СВЪРЖЕТЕ СЕ С НАС
+                  {contactData.formTitle}
                 </button>
                 <p className="text-gray-600 text-sm">
-                  Ще се свържем с вас в рамките на 24 часа.
+                  {contactData.responseTime}
                 </p>
               </div>
             </form>
@@ -231,10 +331,10 @@ export default function ContactPage() {
                 ЕДНО ПОСТОЯННО ЛИЦЕ ЗА КОНТАКТ
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6 uppercase">
-                НАШАТА ЛОКАЦИЯ
+                {contactData.locationSectionTitle}
               </h2>
               <p className="text-gray-700 leading-relaxed mb-8">
-                Екип от квалифицирани бояджии и единна точка за контакт. Продължаваме напред заедно.
+                {contactData.locationDescription}
               </p>
 
               {/* Location Card */}
@@ -244,24 +344,33 @@ export default function ContactPage() {
                     <MapPin size={32} className="text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-neutral-dark text-2xl mb-2">{location.city}</h3>
-                    <p className="text-gray-600 text-lg mb-4">{location.company}</p>
+                    <h3 className="font-bold text-neutral-dark text-2xl mb-2">
+                      {location.city}
+                    </h3>
+                    <p className="text-gray-600 text-lg mb-4">
+                      {location.company}
+                    </p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin size={20} className="text-primary flex-shrink-0 mt-1" />
+                    <MapPin
+                      size={20}
+                      className="text-primary flex-shrink-0 mt-1"
+                    />
                     <div>
-                      <p className="text-gray-700 font-medium">{location.address}</p>
+                      <p className="text-gray-700 font-medium">
+                        {location.address}
+                      </p>
                       <p className="text-gray-700">{location.postalCode}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <Phone size={20} className="text-primary flex-shrink-0" />
-                    <a 
-                      href={`tel:${location.phone.replace(/\s/g, '')}`}
+                    <a
+                      href={`tel:${location.phone.replace(/\s/g, "")}`}
                       className="text-primary hover:text-primary-red-dark transition-colors font-bold text-lg"
                     >
                       {location.phone}
@@ -270,7 +379,7 @@ export default function ContactPage() {
 
                   <div className="flex items-center gap-3">
                     <Mail size={20} className="text-primary flex-shrink-0" />
-                    <a 
+                    <a
                       href={`mailto:${location.email}`}
                       className="text-primary hover:text-primary-red-dark transition-colors font-medium"
                     >
@@ -285,29 +394,29 @@ export default function ContactPage() {
             <div>
               <div className="relative h-full min-h-[500px] rounded-lg overflow-hidden">
                 {/* Background Image */}
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: 'url(/images/contact-building.jpg)',
-                    filter: 'brightness(0.7)'
+                    backgroundImage: "url(/images/contact-building.jpg)",
+                    filter: "brightness(0.7)",
                   }}
                 />
                 <div className="absolute inset-0 bg-black/40" />
-                
+
                 {/* CTA Box */}
                 <div className="relative h-full flex items-end p-6">
                   <div className="bg-black/70 backdrop-blur-sm p-6 rounded-lg w-full">
                     <p className="text-white font-bold text-lg mb-4">
-                      Нуждаете се от съвет или искате да си уговорите час без обвързване?
+                      {contactData.ctaText}
                     </p>
-                    <p className="text-white mb-4">Обадете ни се на:</p>
+                    <p className="text-white mb-4">{contactData.ctaSubtext}</p>
                     <div className="border-2 border-dashed border-primary px-4 py-3 inline-flex items-center gap-3">
                       <Phone size={24} className="text-white" />
-                      <a 
-                        href="tel:0575540147" 
+                      <a
+                        href={`tel:${contactData.phoneNumber.replace(/\s/g, "")}`}
                         className="text-white font-bold text-2xl hover:underline"
                       >
-                        0575 - 540 147
+                        {contactData.phoneNumber}
                       </a>
                     </div>
                   </div>
@@ -322,4 +431,3 @@ export default function ContactPage() {
     </>
   );
 }
-

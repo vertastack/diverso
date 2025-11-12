@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_diverso_gallery_projects",
+  "info": {
+    "displayName": "Gallery Project",
+    "description": "Individual project item for gallery section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": ["exterior", "interior"],
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

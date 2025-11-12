@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diverso_heroes",
+  "info": {
+    "singularName": "diverso-hero",
+    "pluralName": "diverso-heroes",
+    "displayName": "Diverso Hero",
+    "description": "Hero section content for home page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.hero-slide"
+    },
+    "bottomBarText": {
+      "type": "text",
+      "required": true
+    },
+    "phoneText": {
+      "type": "string",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "ctaButtonText": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

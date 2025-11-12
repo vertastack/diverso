@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_diverso_features",
+  "info": {
+    "displayName": "Feature",
+    "description": "Feature list item"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

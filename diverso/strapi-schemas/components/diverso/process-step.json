@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_diverso_process_steps",
+  "info": {
+    "displayName": "Process Step",
+    "description": "Step in the process workflow"
+  },
+  "options": {},
+  "attributes": {
+    "stepNumber": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": ["calendar", "users", "star"],
+      "required": true
+    },
+    "bgColor": {
+      "type": "enumeration",
+      "enum": ["white", "secondary"],
+      "required": true
+    }
+  }
+}

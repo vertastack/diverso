@@ -1,23 +1,117 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/app/shared/components/Header";
+import Footer from "@/app/shared/components/Footer";
 import { Check } from "lucide-react";
 import type { Metadata } from "next";
+import SEO from "../shared/components/Seo";
+import StrapiService from "@/src/services/strapi.service";
 
-export const metadata: Metadata = {
-  title: "За нас | RS Schildersgroep BV",
-  description: "Историята зад RS Schildersgroep BV - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
-};
+interface AboutData {
+  id: number;
+  metaTitle: string;
+  metaDescription: string;
+  metaImage?: {
+    url: string;
+  };
+  metaKeywords?: string;
+  metaRobots?: string;
+  metaUrl?: string;
+  pageTitle: string;
+  pageDescription: string;
+  headerQuote: string;
+  storyTitle: string;
+  storyContent: string;
+  features: Array<{
+    id: number;
+    text: string;
+  }>;
+  teamImages: Array<{
+    id: number;
+    image: {
+      url: string;
+      alternativeText?: string;
+    };
+    caption?: string;
+  }>;
+  teamCaption?: string;
+}
 
-export default function AboutPage() {
+async function getAboutData(): Promise<AboutData | null> {
+  try {
+    const strapiService = new StrapiService();
+    const response = await strapiService.getContent<AboutData>(
+      "diverso/about",
+      {
+        populate: {
+          metaImage: "*",
+          features: "*",
+          teamImages: {
+            populate: {
+              image: "*",
+            },
+          },
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching about data:", error);
+    return null;
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const aboutData = await getAboutData();
+
+  if (aboutData) {
+    return {
+      title: aboutData.pageTitle,
+      description: aboutData.pageDescription,
+    };
+  }
+
+  // Fallback metadata
+  return {
+    title: "За нас | RS Schildersgroep BV",
+    description:
+      "Историята зад RS Schildersgroep BV - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
+  };
+}
+
+export default async function AboutPage() {
+  const aboutData = await getAboutData();
+
+  if (!aboutData) {
+    return (
+      <>
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <p className="text-gray-600">Няма данни за зареждане.</p>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  const seo = {
+    metaTitle: aboutData.metaTitle || "Welcome to Diverso",
+    metaDescription: aboutData.metaDescription || "Diverso Description",
+    metaImage: aboutData.metaImage || { url: "" },
+    metaKeywords: aboutData.metaKeywords || "",
+    metaRobots: aboutData.metaRobots || "index, contact",
+    metaUrl: aboutData.metaUrl || "https://diverso.com",
+  };
+
   return (
     <>
+      <SEO seo={seo} />
       <Header />
-      
+
       {/* Red Header Section */}
       <section className="bg-primary py-8">
         <div className="container mx-auto px-4">
           <p className="text-white text-center text-xl md:text-2xl font-medium">
-            Гордеем се с нашите майстори, истински професионалисти с любов към работата си и око за детайлите.
+            {aboutData.headerQuote}
           </p>
         </div>
       </section>
@@ -29,45 +123,33 @@ export default function AboutPage() {
             {/* Left Column - Story */}
             <div className="lg:col-span-2">
               <h1 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6">
-                ИСТОРИЯТА ЗАД RS SCHILDERSGROEP BV
+                {aboutData.storyTitle}
               </h1>
               <div className="space-y-6 text-gray-700 leading-relaxed">
-                <p>
-                  RS Schildersgroep е бояджийска компания, която приема прецизността и качеството за даденост, спечелвайки отлична репутация на регионалния пазар. Ние обслужваме голяма клиентела както в жилищния, така и в търговския сектор в регионите Зутфен, Лохем, Ворден, Варнсвелд, Ворст, Еефде и Девентер.
-                </p>
-                <p>
-                  Специализирани в поддръжка на боядисване в малък и голям мащаб, реставрация, ремонт на гниеща дървесина, довършителни работи по стените и остъкляване. Екип от опитни и професионални бояджии с око за детайлите. Ключът към успеха е доверието. Това изисква прозрачен подход, експертни (цветови) съвети и кристално ясна гаранция.
-                </p>
+                {aboutData.storyContent
+                  .split("\n\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
               </div>
             </div>
 
             {/* Right Column - Features */}
             <div className="bg-secondary-teal p-8">
               <ul className="space-y-4">
-                <li className="flex items-start gap-3 text-white border-b border-white/20 pb-4">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Екип от квалифицирани и опитни бояджии</span>
-                </li>
-                <li className="flex items-start gap-3 text-white border-b border-white/20 pb-4">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Активен от 2003 г.: повече от 19 години опит</span>
-                </li>
-                <li className="flex items-start gap-3 text-white border-b border-white/20 pb-4">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Гаранция за бояджийските работи, вие избирате сигурност</span>
-                </li>
-                <li className="flex items-start gap-3 text-white border-b border-white/20 pb-4">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Съвременни техники и висококачествени бояджийски материали</span>
-                </li>
-                <li className="flex items-start gap-3 text-white border-b border-white/20 pb-4">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Инвестиране в бъдещето и новите таланти</span>
-                </li>
-                <li className="flex items-start gap-3 text-white">
-                  <Check size={20} className="mt-1 flex-shrink-0" />
-                  <span className="text-sm">Постоянна и надеждна точка за контакт: да продължим напред заедно</span>
-                </li>
+                {aboutData.features.map((feature, index) => (
+                  <li
+                    key={feature.id}
+                    className={`flex items-start gap-3 text-white ${
+                      index < aboutData.features.length - 1
+                        ? "border-b border-white/20 pb-4"
+                        : ""
+                    }`}
+                  >
+                    <Check size={20} className="mt-1 flex-shrink-0" />
+                    <span className="text-sm">{feature.text}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -78,30 +160,45 @@ export default function AboutPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Left Image - Team Photo */}
-            <div className="md:col-span-2">
-              <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
-                <img 
-                  src="/images/team-photo.jpg" 
-                  alt="RS Schildersgroep Team" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            {/* Right Image - Worker in Action */}
-            <div className="md:col-span-1">
-              <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
-                <img 
-                  src="/images/worker-action.jpg" 
-                  alt="RS Schildersgroep Worker" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            {aboutData.teamImages.length > 0 && (
+              <>
+                {/* First Image - Team Photo (spans 2 columns) */}
+                <div className="md:col-span-2">
+                  <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
+                    <img
+                      src={aboutData.teamImages[0].image.url}
+                      alt={
+                        aboutData.teamImages[0].image.alternativeText ||
+                        "Team Photo"
+                      }
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Second Image - Worker in Action (spans 1 column) */}
+                {aboutData.teamImages[1] && (
+                  <div className="md:col-span-1">
+                    <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
+                      <img
+                        src={aboutData.teamImages[1].image.url}
+                        alt={
+                          aboutData.teamImages[1].image.alternativeText ||
+                          "Worker in Action"
+                        }
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-          <p className="text-center text-gray-600 mt-4 text-sm">
-            Част от RS Schildersgroep BV
-          </p>
+          {aboutData.teamCaption && (
+            <p className="text-center text-gray-600 mt-4 text-sm">
+              {aboutData.teamCaption}
+            </p>
+          )}
         </div>
       </section>
 
@@ -109,4 +206,3 @@ export default function AboutPage() {
     </>
   );
 }
-

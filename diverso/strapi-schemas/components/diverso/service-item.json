@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_diverso_service_items",
+  "info": {
+    "displayName": "Service Item",
+    "description": "Individual service item for services section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

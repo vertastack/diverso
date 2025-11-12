@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_diverso_gallery_images",
+  "info": {
+    "displayName": "Gallery Image",
+    "description": "Image for gallery/slider sections"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_diverso_hero_slides",
+  "info": {
+    "displayName": "Hero Slide",
+    "description": "Individual slide for hero section"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

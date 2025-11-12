@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diverso_process_contacts",
+  "info": {
+    "singularName": "diverso-process-contact",
+    "pluralName": "diverso-process-contacts",
+    "displayName": "Diverso Process Contact",
+    "description": "Process contact section content for home page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "processSteps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.process-step-simple"
+    },
+    "formTitle": {
+      "type": "string",
+      "required": true
+    },
+    "formSubtitle": {
+      "type": "text",
+      "required": true
+    },
+    "formDescription": {
+      "type": "text",
+      "required": true
+    },
+    "ctaBoxTitle": {
+      "type": "string",
+      "required": true
+    },
+    "submitButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "noticeText": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

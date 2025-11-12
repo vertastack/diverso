@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diverso_testimonials_sections",
+  "info": {
+    "singularName": "diverso-testimonials",
+    "pluralName": "diverso-testimonials-sections",
+    "displayName": "Diverso Testimonials Section",
+    "description": "Testimonials section content for home page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionSubtitle": {
+      "type": "string",
+      "required": true
+    },
+    "sectionTitle": {
+      "type": "string",
+      "required": true
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": true
+    },
+    "googleReviewsText": {
+      "type": "string",
+      "required": true
+    },
+    "googleReviewsUrl": {
+      "type": "string",
+      "required": true
+    },
+    "trustpilotReviewsText": {
+      "type": "string",
+      "required": true
+    },
+    "trustpilotReviewsUrl": {
+      "type": "string",
+      "required": true
+    },
+    "testimonials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.testimonial"
+    }
+  }
+}

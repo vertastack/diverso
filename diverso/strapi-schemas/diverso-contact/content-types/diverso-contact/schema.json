@@ -1,0 +1,98 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diverso_contacts",
+  "info": {
+    "singularName": "diverso-contact",
+    "pluralName": "diverso-contacts",
+    "displayName": "Diverso Contact",
+    "description": "Contact page content for Diverso website"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 160
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "metaKeywords": {
+      "type": "string",
+      "required": false
+    },
+    "metaRobots": {
+      "type": "string",
+      "required": false,
+      "default": "index, follow"
+    },
+    "metaUrl": {
+      "type": "string",
+      "required": false
+    },
+    "headerQuote": {
+      "type": "text",
+      "required": true
+    },
+    "pageTitle": {
+      "type": "string",
+      "required": true
+    },
+    "pageDescription": {
+      "type": "text",
+      "required": true
+    },
+    "phoneText": {
+      "type": "string",
+      "required": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "formTitle": {
+      "type": "string",
+      "required": true
+    },
+    "formSubtitle": {
+      "type": "text",
+      "required": false
+    },
+    "responseTime": {
+      "type": "string",
+      "required": true
+    },
+    "locationSectionTitle": {
+      "type": "string",
+      "required": true
+    },
+    "locationDescription": {
+      "type": "text",
+      "required": true
+    },
+    "companyInfo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "diverso.company-info"
+    },
+    "ctaText": {
+      "type": "text",
+      "required": true
+    },
+    "ctaSubtext": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

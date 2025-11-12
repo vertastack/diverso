@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diverso_homes",
+  "info": {
+    "singularName": "diverso-home",
+    "pluralName": "diverso-homes",
+    "displayName": "Diverso Home",
+    "description": "Home page content for Diverso website"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 160
+    },
+    "metaImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "metaKeywords": {
+      "type": "string",
+      "required": false
+    },
+    "metaRobots": {
+      "type": "string",
+      "required": false,
+      "default": "index, follow"
+    },
+    "metaUrl": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_diverso_testimonials",
+  "info": {
+    "displayName": "Testimonial",
+    "description": "Individual testimonial item"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 5,
+      "default": 5
+    },
+    "review": {
+      "type": "text",
+      "required": true
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "verified": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}
