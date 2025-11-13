@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_service_items",
   "info": {
-    "displayName": "Service Item",
+    "displayName": "diverso/Service Item",
     "description": "Individual service item for services section"
   },
   "options": {},

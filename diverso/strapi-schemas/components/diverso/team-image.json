@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_team_images",
   "info": {
-    "displayName": "Team Image",
+    "displayName": "diverso/Team Image",
     "description": "Team image with caption"
   },
   "options": {},

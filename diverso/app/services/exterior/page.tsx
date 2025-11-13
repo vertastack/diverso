@@ -13,8 +13,7 @@ import Image from "next/image";
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface ExteriorData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -23,6 +22,11 @@ interface ExteriorData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface ExteriorData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -61,10 +65,14 @@ async function getExteriorData(): Promise<ExteriorData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<ExteriorData>(
-      "diverso/exterior-service",
+      "diverso-exterior-services",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           galleryImages: {
             populate: {
@@ -86,16 +94,16 @@ async function getExteriorData(): Promise<ExteriorData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const exteriorData = await getExteriorData();
 
-  if (exteriorData) {
+  if (exteriorData && exteriorData.seo) {
     return {
-      title: exteriorData.pageTitle,
-      description: exteriorData.pageDescription,
+      title: exteriorData.seo.metaTitle,
+      description: exteriorData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Външно боядисване | RS Schildersgroep BV",
+    title: "Външно боядисване | Diverso",
     description:
       "Професионално външно боядисване за вашия дом или бизнес. Експертни бояджии с над 20 години опит в Зутфен и региона.",
   };
@@ -144,14 +152,23 @@ export default async function ExteriorPaintingPage() {
     );
   }
 
-  const seo = {
-    metaTitle: exteriorData.metaTitle,
-    metaDescription: exteriorData.metaDescription,
-    metaImage: exteriorData.metaImage || { url: "" },
-    metaKeywords: exteriorData.metaKeywords || "",
-    metaRobots: exteriorData.metaRobots || "index, follow",
-    metaUrl: exteriorData.metaUrl || "https://diverso.com",
-  };
+  const seo = exteriorData.seo
+    ? {
+        metaTitle: exteriorData.seo.metaTitle,
+        metaDescription: exteriorData.seo.metaDescription,
+        metaImage: exteriorData.seo.metaImage || { url: "" },
+        metaKeywords: exteriorData.seo.metaKeywords || "",
+        metaRobots: exteriorData.seo.metaRobots || "index, follow",
+        metaUrl: exteriorData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Екстериорно боядисване | Diverso",
+        metaDescription: "Професионални услуги за екстериорно боядисване.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

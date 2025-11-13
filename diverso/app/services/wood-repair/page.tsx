@@ -13,8 +13,7 @@ import Image from "next/image";
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface WoodRepairData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -23,6 +22,11 @@ interface WoodRepairData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface WoodRepairData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -61,10 +65,14 @@ async function getWoodRepairData(): Promise<WoodRepairData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<WoodRepairData>(
-      "diverso/wood-repair-service",
+      "diverso-wood-repair-services",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           galleryImages: {
             populate: {
@@ -86,16 +94,16 @@ async function getWoodRepairData(): Promise<WoodRepairData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const woodRepairData = await getWoodRepairData();
 
-  if (woodRepairData) {
+  if (woodRepairData && woodRepairData.seo) {
     return {
-      title: woodRepairData.pageTitle,
-      description: woodRepairData.pageDescription,
+      title: woodRepairData.seo.metaTitle,
+      description: woodRepairData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Ремонт на гниеща дървесина | RS Schildersgroep BV",
+    title: "Ремонт на гниеща дървесина | Diverso",
     description:
       "Професионален ремонт на гниеща дървесина за вашия дом или бизнес. Експертни майстори с над 20 години опит в Зутфен и региона.",
   };
@@ -146,14 +154,23 @@ export default async function WoodRepairPage() {
     );
   }
 
-  const seo = {
-    metaTitle: woodRepairData.metaTitle,
-    metaDescription: woodRepairData.metaDescription,
-    metaImage: woodRepairData.metaImage || { url: "" },
-    metaKeywords: woodRepairData.metaKeywords || "",
-    metaRobots: woodRepairData.metaRobots || "index, follow",
-    metaUrl: woodRepairData.metaUrl || "https://diverso.com",
-  };
+  const seo = woodRepairData.seo
+    ? {
+        metaTitle: woodRepairData.seo.metaTitle,
+        metaDescription: woodRepairData.seo.metaDescription,
+        metaImage: woodRepairData.seo.metaImage || { url: "" },
+        metaKeywords: woodRepairData.seo.metaKeywords || "",
+        metaRobots: woodRepairData.seo.metaRobots || "index, follow",
+        metaUrl: woodRepairData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Ремонт на дървесина | Diverso",
+        metaDescription: "Професионални услуги за ремонт на дървесина.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

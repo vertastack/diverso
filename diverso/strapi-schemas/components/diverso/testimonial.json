@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_testimonials",
   "info": {
-    "displayName": "Testimonial",
+    "displayName": "diverso/Testimonial",
     "description": "Individual testimonial item"
   },
   "options": {},

@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_company_infos",
   "info": {
-    "displayName": "Company Info",
+    "displayName": "diverso/Company Info",
     "description": "Company contact information"
   },
   "options": {},

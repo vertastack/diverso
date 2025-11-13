@@ -6,8 +6,7 @@ import type { Metadata } from "next";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface TradingData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -16,6 +15,11 @@ interface TradingData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface TradingData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -43,10 +47,14 @@ async function getTradingData(): Promise<TradingData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<TradingData>(
-      "diverso/trading",
+      "diverso-tradings",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           organizationsList: "*",
           projects: {
             populate: {
@@ -67,18 +75,18 @@ async function getTradingData(): Promise<TradingData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const tradingData = await getTradingData();
 
-  if (tradingData) {
+  if (tradingData && tradingData.seo) {
     return {
-      title: tradingData.pageTitle,
-      description: tradingData.pageDescription,
+      title: tradingData.seo.metaTitle,
+      description: tradingData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Търговски | RS Schildersgroep BV",
+    title: "Търговски | Diverso",
     description:
-      "RS Schildersgroep BV е вашият постоянен партньор за боядисване на бизнес сгради, паметници и офиси. Научете повече за нашите услуги и предимства.",
+      "Diverso е вашият постоянен партньор за боядисване на бизнес сгради, паметници и офиси. Научете повече за нашите услуги и предимства.",
   };
 }
 
@@ -97,14 +105,23 @@ export default async function TradingPage() {
     );
   }
 
-  const seo = {
-    metaTitle: tradingData.metaTitle,
-    metaDescription: tradingData.metaDescription,
-    metaImage: tradingData.metaImage || { url: "" },
-    metaKeywords: tradingData.metaKeywords || "",
-    metaRobots: tradingData.metaRobots || "index, follow",
-    metaUrl: tradingData.metaUrl || "https://diverso.com",
-  };
+  const seo = tradingData.seo
+    ? {
+        metaTitle: tradingData.seo.metaTitle,
+        metaDescription: tradingData.seo.metaDescription,
+        metaImage: tradingData.seo.metaImage || { url: "" },
+        metaKeywords: tradingData.seo.metaKeywords || "",
+        metaRobots: tradingData.seo.metaRobots || "index, follow",
+        metaUrl: tradingData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Търговски услуги | Diverso",
+        metaDescription: "Професионални боядисвани услуги за търговски обекти.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

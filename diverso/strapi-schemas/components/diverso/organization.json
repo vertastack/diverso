@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_organizations",
   "info": {
-    "displayName": "Organization",
+    "displayName": "diverso/Organization",
     "description": "Organization type we serve"
   },
   "options": {},

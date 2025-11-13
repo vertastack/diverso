@@ -5,8 +5,7 @@ import type { Metadata } from "next";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface AboutData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -15,6 +14,11 @@ interface AboutData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface AboutData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -39,10 +43,14 @@ async function getAboutData(): Promise<AboutData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<AboutData>(
-      "diverso/about",
+      "diverso-abouts",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           teamImages: {
             populate: {
@@ -63,18 +71,18 @@ async function getAboutData(): Promise<AboutData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const aboutData = await getAboutData();
 
-  if (aboutData) {
+  if (aboutData && aboutData.seo) {
     return {
-      title: aboutData.pageTitle,
-      description: aboutData.pageDescription,
+      title: aboutData.seo.metaTitle,
+      description: aboutData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "За нас | RS Schildersgroep BV",
+    title: "За нас | Diverso",
     description:
-      "Историята зад RS Schildersgroep BV - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
+      "Историята зад Diverso - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
   };
 }
 
@@ -93,14 +101,24 @@ export default async function AboutPage() {
     );
   }
 
-  const seo = {
-    metaTitle: aboutData.metaTitle || "Welcome to Diverso",
-    metaDescription: aboutData.metaDescription || "Diverso Description",
-    metaImage: aboutData.metaImage || { url: "" },
-    metaKeywords: aboutData.metaKeywords || "",
-    metaRobots: aboutData.metaRobots || "index, contact",
-    metaUrl: aboutData.metaUrl || "https://diverso.com",
-  };
+  const seo = aboutData.seo
+    ? {
+        metaTitle: aboutData.seo.metaTitle,
+        metaDescription: aboutData.seo.metaDescription,
+        metaImage: aboutData.seo.metaImage || { url: "" },
+        metaKeywords: aboutData.seo.metaKeywords || "",
+        metaRobots: aboutData.seo.metaRobots || "index, follow",
+        metaUrl: aboutData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "За нас | Diverso",
+        metaDescription:
+          "Историята зад Diverso - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

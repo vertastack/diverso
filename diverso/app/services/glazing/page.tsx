@@ -13,8 +13,7 @@ import Image from "next/image";
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface GlazingData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -23,6 +22,11 @@ interface GlazingData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface GlazingData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -61,10 +65,14 @@ async function getGlazingData(): Promise<GlazingData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<GlazingData>(
-      "diverso/glazing-service",
+      "diverso-glazing-services",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           galleryImages: {
             populate: {
@@ -86,16 +94,16 @@ async function getGlazingData(): Promise<GlazingData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const glazingData = await getGlazingData();
 
-  if (glazingData) {
+  if (glazingData && glazingData.seo) {
     return {
-      title: glazingData.pageTitle,
-      description: glazingData.pageDescription,
+      title: glazingData.seo.metaTitle,
+      description: glazingData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Остъкляване | RS Schildersgroep BV",
+    title: "Остъкляване | Diverso",
     description:
       "Професионално остъкляване за вашия дом или бизнес. Експертни майстори с над 20 години опит в Зутфен и региона.",
   };
@@ -144,14 +152,23 @@ export default async function GlazingPage() {
     );
   }
 
-  const seo = {
-    metaTitle: glazingData.metaTitle,
-    metaDescription: glazingData.metaDescription,
-    metaImage: glazingData.metaImage || { url: "" },
-    metaKeywords: glazingData.metaKeywords || "",
-    metaRobots: glazingData.metaRobots || "index, follow",
-    metaUrl: glazingData.metaUrl || "https://diverso.com",
-  };
+  const seo = glazingData.seo
+    ? {
+        metaTitle: glazingData.seo.metaTitle,
+        metaDescription: glazingData.seo.metaDescription,
+        metaImage: glazingData.seo.metaImage || { url: "" },
+        metaKeywords: glazingData.seo.metaKeywords || "",
+        metaRobots: glazingData.seo.metaRobots || "index, follow",
+        metaUrl: glazingData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Остъкляване | Diverso",
+        metaDescription: "Професионални услуги за остъкляване.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

@@ -7,8 +7,7 @@ import { useState, useEffect } from "react";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
 
-interface ContactData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -17,6 +16,11 @@ interface ContactData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface ContactData {
+  id: number;
+  seo: SEOData;
   headerQuote: string;
   pageTitle: string;
   pageDescription: string;
@@ -57,10 +61,14 @@ export default function ContactPage() {
       try {
         const strapiService = new StrapiService();
         const response = await strapiService.getContent<ContactData>(
-          "diverso/contact",
+          "diverso-contacts",
           {
             populate: {
-              metaImage: "*",
+              seo: {
+                populate: {
+                  metaImage: "*",
+                },
+              },
               companyInfo: "*",
             },
           },
@@ -86,14 +94,24 @@ export default function ContactPage() {
     );
   }
 
-  const seo = {
-    metaTitle: contactData.metaTitle,
-    metaDescription: contactData.metaDescription,
-    metaImage: contactData.metaImage || { url: "" },
-    metaKeywords: contactData.metaKeywords || "",
-    metaRobots: contactData.metaRobots || "index, follow",
-    metaUrl: contactData.metaUrl || "https://diverso.com",
-  };
+  const seo = contactData.seo
+    ? {
+        metaTitle: contactData.seo.metaTitle,
+        metaDescription: contactData.seo.metaDescription,
+        metaImage: contactData.seo.metaImage || { url: "" },
+        metaKeywords: contactData.seo.metaKeywords || "",
+        metaRobots: contactData.seo.metaRobots || "index, follow",
+        metaUrl: contactData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Контакти | Diverso",
+        metaDescription:
+          "Свържете се с нас за професионални боядисвани услуги.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
