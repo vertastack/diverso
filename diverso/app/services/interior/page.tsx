@@ -9,12 +9,12 @@ import {
   MessageSquare,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
-interface InteriorData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -23,6 +23,11 @@ interface InteriorData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface InteriorData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -61,10 +66,14 @@ async function getInteriorData(): Promise<InteriorData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<InteriorData>(
-      "diverso/interior-service",
+      "diverso-interior-service",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           galleryImages: {
             populate: {
@@ -86,16 +95,16 @@ async function getInteriorData(): Promise<InteriorData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const interiorData = await getInteriorData();
 
-  if (interiorData) {
+  if (interiorData && interiorData.seo) {
     return {
-      title: interiorData.pageTitle,
-      description: interiorData.pageDescription,
+      title: interiorData.seo.metaTitle,
+      description: interiorData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Интериорно боядисване | RS Schildersgroep BV",
+    title: "Интериорно боядисване | Diverso",
     description:
       "Професионално интериорно боядисване за вашия дом или бизнес. Експертни бояджии с над 20 години опит в Зутфен и региона.",
   };
@@ -116,11 +125,10 @@ const InteriorSlider = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {images.map((imageData) => (
           <div key={imageData.id} className="relative h-64 bg-gray-200">
-            <Image
-              src={imageData.image.url}
-              alt={imageData.image.alternativeText || "Интериорно боядисване"}
-              fill
-              className="object-cover"
+            <img
+              src={getImageUrl(imageData.image)}
+              alt={getImageAlt(imageData.image, "Интериорно боядисване")}
+              className="w-full h-full object-cover"
             />
           </div>
         ))}
@@ -144,14 +152,23 @@ export default async function InteriorPaintingPage() {
     );
   }
 
-  const seo = {
-    metaTitle: interiorData.metaTitle,
-    metaDescription: interiorData.metaDescription,
-    metaImage: interiorData.metaImage || { url: "" },
-    metaKeywords: interiorData.metaKeywords || "",
-    metaRobots: interiorData.metaRobots || "index, follow",
-    metaUrl: interiorData.metaUrl || "https://diverso.com",
-  };
+  const seo = interiorData.seo
+    ? {
+        metaTitle: interiorData.seo.metaTitle,
+        metaDescription: interiorData.seo.metaDescription,
+        metaImage: interiorData.seo.metaImage || { url: "" },
+        metaKeywords: interiorData.seo.metaKeywords || "",
+        metaRobots: interiorData.seo.metaRobots || "index, follow",
+        metaUrl: interiorData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Интериорно боядисване | Diverso",
+        metaDescription: "Професионални услуги за интериорно боядисване.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>

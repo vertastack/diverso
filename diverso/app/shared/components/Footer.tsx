@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { Facebook, Linkedin, MessageCircle } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { Facebook, Linkedin, MessageCircle } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -12,31 +12,32 @@ const Footer: React.FC = () => {
             {/* Company Info */}
             <div>
               <h4 className="text-lg font-bold mb-4 border-b-2 border-primary inline-block pb-1">
-                РС ШИЛДЪРСГРОЕП БВ
+                Diverso
               </h4>
               <p className="text-white/80 text-sm leading-relaxed">
-                Бояджийска компания, базирана в Зутфен, предлагаща боядисване, реставрация, 
-                ремонт на гипсена дърворезба, шпакловане, довършителни работи по стените и 
-                остъкляване. Повече от 20 години, нашият доверен партньор и лице за контакт 
-                за най-добрите бояджийски услуги: продължаваме напред заедно.
+                Бояджийска компания, базирана в Зутфен, предлагаща боядисване,
+                реставрация, ремонт на гипсена дърворезба, шпакловане,
+                довършителни работи по стените и остъкляване. Повече от 20
+                години, нашият доверен партньор и лице за контакт за най-добрите
+                бояджийски услуги: продължаваме напред заедно.
               </p>
               <div className="flex items-center gap-4 mt-6">
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook size={18} />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={18} />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
                   aria-label="WhatsApp"
                 >
@@ -52,32 +53,50 @@ const Footer: React.FC = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/" className="text-white/70 hover:text-white transition-colors text-sm">
-                    ☑ Дом
+                  <Link
+                    href="/"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
+                    ☑ Начало
                   </Link>
                 </li>
                 <li>
-                  <Link href="/multi-year-plan" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/services/maintenance-plan"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Многогодишен план за поддръжка
                   </Link>
                 </li>
                 <li>
-                  <Link href="/references" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/references"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Референции
                   </Link>
                 </li>
                 <li>
-                  <Link href="/trading" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/trading"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Търговски
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/about"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ За нас
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/contact"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Контакт
                   </Link>
                 </li>
@@ -91,22 +110,34 @@ const Footer: React.FC = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/services/interior" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/services/interior"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Интериорно боядисване
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services/exterior" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/services/exterior"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Външно боядисване
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services/glass" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/services/glazing"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Остъкляване
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services/restoration" className="text-white/70 hover:text-white transition-colors text-sm">
+                  <Link
+                    href="/services/wood-repair"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
                     ☑ Ремонт на гипсена дърворезба
                   </Link>
                 </li>
@@ -123,14 +154,27 @@ const Footer: React.FC = () => {
                   <strong>RS Painting Group</strong>
                 </p>
                 <p className="text-white/70">
-                  Extended Ooyerhoekseweg 16<br />
+                  Extended Ooyerhoekseweg 16
+                  <br />
                   7207 BJ Zutphen
                 </p>
                 <p className="text-white/70">
-                  Тел.: <a href="tel:0575540147" className="hover:text-white transition-colors">0575 - 540 147</a>
+                  Тел.:{" "}
+                  <a
+                    href="tel:0575540147"
+                    className="hover:text-white transition-colors"
+                  >
+                    0575 - 540 147
+                  </a>
                 </p>
                 <p className="text-white/70">
-                  Поща: <a href="mailto:info@rsschildersgroep.nl" className="hover:text-white transition-colors">info@rsschildersgroep.nl</a>
+                  Поща:{" "}
+                  <a
+                    href="mailto:info@rsschildersgroep.nl"
+                    className="hover:text-white transition-colors"
+                  >
+                    info@rsschildersgroep.nl
+                  </a>
                 </p>
               </div>
             </div>

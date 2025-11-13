@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_gallery_images",
   "info": {
-    "displayName": "Gallery Image",
+    "displayName": "diverso/Gallery Image",
     "description": "Image for gallery/slider sections"
   },
   "options": {},

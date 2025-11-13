@@ -4,42 +4,231 @@
   "info": {
     "singularName": "diverso-home",
     "pluralName": "diverso-homes",
-    "displayName": "Diverso Home",
-    "description": "Home page content for Diverso website"
+    "displayName": "diverso/Home",
+    "description": "Complete home page content for Diverso website with all sections"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "metaTitle": {
-      "type": "string",
-      "required": true,
-      "maxLength": 60
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "diverso.seo",
+      "required": true
     },
-    "metaDescription": {
+    "heroSlides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.hero-slide"
+    },
+    "heroBottomBarText": {
       "type": "text",
-      "required": true,
-      "maxLength": 160
+      "required": true
     },
-    "metaImage": {
+    "heroPhoneText": {
+      "type": "string",
+      "required": true
+    },
+    "heroPhoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "heroCtaButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "servicesSubtitle": {
+      "type": "string",
+      "required": true
+    },
+    "servicesTitle": {
+      "type": "string",
+      "required": true
+    },
+    "servicesDescription": {
+      "type": "richtext",
+      "required": true
+    },
+    "services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.service-item"
+    },
+    "aboutSubtitle": {
+      "type": "string",
+      "required": true
+    },
+    "aboutTitle": {
+      "type": "string",
+      "required": true
+    },
+    "aboutDescription": {
+      "type": "richtext",
+      "required": true
+    },
+    "aboutTeamImage": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": ["images"]
     },
-    "metaKeywords": {
+    "aboutReviewsCardTitle": {
       "type": "string",
-      "required": false
+      "required": true
     },
-    "metaRobots": {
+    "aboutAverageRating": {
       "type": "string",
-      "required": false,
-      "default": "index, follow"
+      "required": true
     },
-    "metaUrl": {
+    "aboutRatingStars": {
+      "type": "integer",
+      "required": true,
+      "default": 5,
+      "min": 1,
+      "max": 5
+    },
+    "aboutReviewsLinkText": {
       "type": "string",
-      "required": false
+      "required": true
+    },
+    "aboutReviewsLinkUrl": {
+      "type": "string",
+      "required": true
+    },
+    "aboutBenefits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.feature"
+    },
+    "aboutCtaButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "aboutCtaButtonUrl": {
+      "type": "string",
+      "required": true
+    },
+    "ctaImages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.gallery-image"
+    },
+    "ctaMainQuestion": {
+      "type": "text",
+      "required": true
+    },
+    "ctaPhoneText": {
+      "type": "string",
+      "required": true
+    },
+    "ctaPhoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "ctaOrText": {
+      "type": "string",
+      "required": true
+    },
+    "ctaButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsSubtitle": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsTitle": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsDescription": {
+      "type": "text",
+      "required": true
+    },
+    "testimonialsGoogleReviewsText": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsGoogleReviewsUrl": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsTrustpilotReviewsText": {
+      "type": "string",
+      "required": true
+    },
+    "testimonialsTrustpilotReviewsUrl": {
+      "type": "string",
+      "required": true
+    },
+    "testimonials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.testimonial"
+    },
+    "processSteps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.process-step-simple"
+    },
+    "processFormTitle": {
+      "type": "string",
+      "required": true
+    },
+    "processFormSubtitle": {
+      "type": "text",
+      "required": true
+    },
+    "processFormDescription": {
+      "type": "text",
+      "required": true
+    },
+    "processCtaBoxTitle": {
+      "type": "string",
+      "required": true
+    },
+    "processSubmitButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "processNoticeText": {
+      "type": "richtext",
+      "required": true
+    },
+    "gallerySubtitle": {
+      "type": "string",
+      "required": true
+    },
+    "galleryTitle": {
+      "type": "string",
+      "required": true
+    },
+    "galleryDescription": {
+      "type": "text",
+      "required": true
+    },
+    "galleryShowAllButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "galleryExteriorButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "galleryInteriorButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "galleryLoadMoreButtonText": {
+      "type": "string",
+      "required": true
+    },
+    "galleryProjects": {
+      "type": "component",
+      "repeatable": true,
+      "component": "diverso.gallery-project"
     }
   }
 }

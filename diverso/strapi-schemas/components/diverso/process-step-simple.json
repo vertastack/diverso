@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_process_step_simples",
   "info": {
-    "displayName": "Process Step Simple",
+    "displayName": "diverso/Process Step Simple",
     "description": "Simple process step for process contact section"
   },
   "options": {},

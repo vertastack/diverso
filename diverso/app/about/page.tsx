@@ -4,9 +4,9 @@ import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
-interface AboutData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -15,6 +15,11 @@ interface AboutData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface AboutData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -39,10 +44,14 @@ async function getAboutData(): Promise<AboutData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<AboutData>(
-      "diverso/about",
+      "diverso-about",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           teamImages: {
             populate: {
@@ -52,7 +61,6 @@ async function getAboutData(): Promise<AboutData | null> {
         },
       },
     );
-
     return response.data;
   } catch (error) {
     console.error("Error fetching about data:", error);
@@ -63,18 +71,18 @@ async function getAboutData(): Promise<AboutData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const aboutData = await getAboutData();
 
-  if (aboutData) {
+  if (aboutData && aboutData.seo) {
     return {
-      title: aboutData.pageTitle,
-      description: aboutData.pageDescription,
+      title: aboutData.seo.metaTitle,
+      description: aboutData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "За нас | RS Schildersgroep BV",
+    title: "За нас | Diverso",
     description:
-      "Историята зад RS Schildersgroep BV - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
+      "Историята зад Diverso - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
   };
 }
 
@@ -93,14 +101,24 @@ export default async function AboutPage() {
     );
   }
 
-  const seo = {
-    metaTitle: aboutData.metaTitle || "Welcome to Diverso",
-    metaDescription: aboutData.metaDescription || "Diverso Description",
-    metaImage: aboutData.metaImage || { url: "" },
-    metaKeywords: aboutData.metaKeywords || "",
-    metaRobots: aboutData.metaRobots || "index, contact",
-    metaUrl: aboutData.metaUrl || "https://diverso.com",
-  };
+  const seo = aboutData.seo
+    ? {
+        metaTitle: aboutData.seo.metaTitle,
+        metaDescription: aboutData.seo.metaDescription,
+        metaImage: aboutData.seo.metaImage || { url: "" },
+        metaKeywords: aboutData.seo.metaKeywords || "",
+        metaRobots: aboutData.seo.metaRobots || "index, follow",
+        metaUrl: aboutData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "За нас | Diverso",
+        metaDescription:
+          "Историята зад Diverso - бояджийска компания с над 20 години опит в Зутфен и региона. Познайте нашия екип и нашата мисия.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>
@@ -166,11 +184,11 @@ export default async function AboutPage() {
                 <div className="md:col-span-2">
                   <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
                     <img
-                      src={aboutData.teamImages[0].image.url}
-                      alt={
-                        aboutData.teamImages[0].image.alternativeText ||
-                        "Team Photo"
-                      }
+                      src={getImageUrl(aboutData.teamImages[0].image)}
+                      alt={getImageAlt(
+                        aboutData.teamImages[0].image,
+                        "Team Photo",
+                      )}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -181,11 +199,11 @@ export default async function AboutPage() {
                   <div className="md:col-span-1">
                     <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
                       <img
-                        src={aboutData.teamImages[1].image.url}
-                        alt={
-                          aboutData.teamImages[1].image.alternativeText ||
-                          "Worker in Action"
-                        }
+                        src={getImageUrl(aboutData.teamImages[1].image)}
+                        alt={getImageAlt(
+                          aboutData.teamImages[1].image,
+                          "Worker in Action",
+                        )}
                         className="w-full h-full object-cover"
                       />
                     </div>

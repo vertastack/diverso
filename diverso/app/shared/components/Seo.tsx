@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { getImageUrl } from "@/app/shared/utils/image";
 
 interface SeoProps {
   metaTitle: string;
@@ -18,12 +19,12 @@ interface SEOComponentProps {
 
 const SEO: React.FC<SEOComponentProps> = ({ seo }) => {
   const title = seo?.metaTitle || "Fortus Lab";
-  const description = seo?.metaDescription || 'Fortus Lab';
-  const image = seo?.metaImage?.url;
-  const robots = seo?.metaRobots || 'index, contact';
-  const keywords = seo?.metaKeywords || '';
-  const url = seo?.metaUrl || '';
-  const twitterCardType = seo?.twitterCardType || 'summary_large_image';
+  const description = seo?.metaDescription || "Fortus Lab";
+  const image = getImageUrl(seo?.metaImage);
+  const robots = seo?.metaRobots || "index, contact";
+  const keywords = seo?.metaKeywords || "";
+  const url = seo?.metaUrl || "";
+  const twitterCardType = seo?.twitterCardType || "summary_large_image";
 
   return (
     <Head>

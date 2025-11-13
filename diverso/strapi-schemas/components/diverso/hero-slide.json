@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_hero_slides",
   "info": {
-    "displayName": "Hero Slide",
+    "displayName": "diverso/Hero Slide",
     "description": "Individual slide for hero section"
   },
   "options": {},

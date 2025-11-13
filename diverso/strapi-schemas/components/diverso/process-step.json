@@ -1,7 +1,7 @@
 {
   "collectionName": "components_diverso_process_steps",
   "info": {
-    "displayName": "Process Step",
+    "displayName": "diverso/Process Step",
     "description": "Step in the process workflow"
   },
   "options": {},

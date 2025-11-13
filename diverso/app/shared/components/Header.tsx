@@ -174,12 +174,12 @@ const Header: React.FC = () => {
               >
                 Търговски
               </Link>
-              <Link
+              {/* <Link
                 href="/references"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
                 Референции
-              </Link>
+              </Link> */}
               <Link
                 href="/about"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
@@ -314,13 +314,13 @@ const Header: React.FC = () => {
               Търговски
             </Link>
 
-            <Link
+            {/* <Link
               href="/references"
               onClick={closeMobileMenu}
               className="block text-white py-4 border-b border-white/10 hover:text-primary transition-colors"
             >
               Референции
-            </Link>
+            </Link> */}
 
             <Link
               href="/about"

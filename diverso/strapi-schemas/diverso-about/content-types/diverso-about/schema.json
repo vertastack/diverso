@@ -4,7 +4,7 @@
   "info": {
     "singularName": "diverso-about",
     "pluralName": "diverso-abouts",
-    "displayName": "Diverso About",
+    "displayName": "diverso/About",
     "description": "About page content for Diverso website"
   },
   "options": {
@@ -12,34 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "metaTitle": {
-      "type": "string",
-      "required": true,
-      "maxLength": 60
-    },
-    "metaDescription": {
-      "type": "text",
-      "required": true,
-      "maxLength": 160
-    },
-    "metaImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images"]
-    },
-    "metaKeywords": {
-      "type": "string",
-      "required": false
-    },
-    "metaRobots": {
-      "type": "string",
-      "required": false,
-      "default": "index, follow"
-    },
-    "metaUrl": {
-      "type": "string",
-      "required": false
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "diverso.seo",
+      "required": true
     },
     "pageTitle": {
       "type": "string",

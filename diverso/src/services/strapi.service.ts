@@ -98,7 +98,6 @@ class StrapiService {
       }
       return result;
     }
-
     // Primitive – return as is
     return obj;
   }

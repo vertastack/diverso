@@ -9,12 +9,12 @@ import {
   MessageSquare,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
-interface MaintenancePlanData {
-  id: number;
+interface SEOData {
   metaTitle: string;
   metaDescription: string;
   metaImage?: {
@@ -23,6 +23,11 @@ interface MaintenancePlanData {
   metaKeywords?: string;
   metaRobots?: string;
   metaUrl?: string;
+}
+
+interface MaintenancePlanData {
+  id: number;
+  seo: SEOData;
   pageTitle: string;
   pageDescription: string;
   headerQuote: string;
@@ -61,10 +66,14 @@ async function getMaintenancePlanData(): Promise<MaintenancePlanData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<MaintenancePlanData>(
-      "diverso/maintenance-plan-service",
+      "diverso-maintenance-plan-service",
       {
         populate: {
-          metaImage: "*",
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
           features: "*",
           galleryImages: {
             populate: {
@@ -86,16 +95,16 @@ async function getMaintenancePlanData(): Promise<MaintenancePlanData | null> {
 export async function generateMetadata(): Promise<Metadata> {
   const maintenancePlanData = await getMaintenancePlanData();
 
-  if (maintenancePlanData) {
+  if (maintenancePlanData && maintenancePlanData.seo) {
     return {
-      title: maintenancePlanData.pageTitle,
-      description: maintenancePlanData.pageDescription,
+      title: maintenancePlanData.seo.metaTitle,
+      description: maintenancePlanData.seo.metaDescription,
     };
   }
 
   // Fallback metadata
   return {
-    title: "Многогодишен план за поддръжка | RS Schildersgroep BV",
+    title: "Многогодишен план за поддръжка | Diverso",
     description:
       "Професионален многогодишен план за поддръжка на вашия дом или бизнес. Експертни майстори с над 20 години опит в Зутфен и региона.",
   };
@@ -116,14 +125,13 @@ const MaintenancePlanSlider = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {images.map((imageData) => (
           <div key={imageData.id} className="relative h-64 bg-gray-200">
-            <Image
-              src={imageData.image.url}
-              alt={
-                imageData.image.alternativeText ||
-                "Многогодишен план за поддръжка"
-              }
-              fill
-              className="object-cover"
+            <img
+              src={getImageUrl(imageData.image)}
+              alt={getImageAlt(
+                imageData.image,
+                "Многогодишен план за поддръжка",
+              )}
+              className="w-full h-full object-cover"
             />
           </div>
         ))}
@@ -147,14 +155,23 @@ export default async function MaintenancePlanPage() {
     );
   }
 
-  const seo = {
-    metaTitle: maintenancePlanData.metaTitle,
-    metaDescription: maintenancePlanData.metaDescription,
-    metaImage: maintenancePlanData.metaImage || { url: "" },
-    metaKeywords: maintenancePlanData.metaKeywords || "",
-    metaRobots: maintenancePlanData.metaRobots || "index, follow",
-    metaUrl: maintenancePlanData.metaUrl || "https://diverso.com",
-  };
+  const seo = maintenancePlanData.seo
+    ? {
+        metaTitle: maintenancePlanData.seo.metaTitle,
+        metaDescription: maintenancePlanData.seo.metaDescription,
+        metaImage: maintenancePlanData.seo.metaImage || { url: "" },
+        metaKeywords: maintenancePlanData.seo.metaKeywords || "",
+        metaRobots: maintenancePlanData.seo.metaRobots || "index, follow",
+        metaUrl: maintenancePlanData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "План за поддръжка | Diverso",
+        metaDescription: "Професионални услуги за план за поддръжка.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
 
   return (
     <>
