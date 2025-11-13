@@ -1,5 +1,5 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "diverso_wood_repair_services",
   "info": {
     "singularName": "diverso-wood-repair-service",

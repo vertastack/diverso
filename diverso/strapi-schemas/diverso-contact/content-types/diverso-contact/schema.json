@@ -1,5 +1,5 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "diverso_contacts",
   "info": {
     "singularName": "diverso-contact",

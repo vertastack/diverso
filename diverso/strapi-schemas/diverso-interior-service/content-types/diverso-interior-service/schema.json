@@ -1,5 +1,5 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "diverso_interior_services",
   "info": {
     "singularName": "diverso-interior-service",
