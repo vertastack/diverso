@@ -4,6 +4,7 @@ import { Check } from "lucide-react";
 import type { Metadata } from "next";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
 interface SEOData {
   metaTitle: string;
@@ -43,7 +44,7 @@ async function getAboutData(): Promise<AboutData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<AboutData>(
-      "diverso-abouts",
+      "diverso-about",
       {
         populate: {
           seo: {
@@ -60,7 +61,6 @@ async function getAboutData(): Promise<AboutData | null> {
         },
       },
     );
-
     return response.data;
   } catch (error) {
     console.error("Error fetching about data:", error);
@@ -184,11 +184,11 @@ export default async function AboutPage() {
                 <div className="md:col-span-2">
                   <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
                     <img
-                      src={aboutData.teamImages[0].image.url}
-                      alt={
-                        aboutData.teamImages[0].image.alternativeText ||
-                        "Team Photo"
-                      }
+                      src={getImageUrl(aboutData.teamImages[0].image)}
+                      alt={getImageAlt(
+                        aboutData.teamImages[0].image,
+                        "Team Photo",
+                      )}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -199,11 +199,11 @@ export default async function AboutPage() {
                   <div className="md:col-span-1">
                     <div className="relative h-[400px] md:h-[500px] bg-gray-200 rounded overflow-hidden">
                       <img
-                        src={aboutData.teamImages[1].image.url}
-                        alt={
-                          aboutData.teamImages[1].image.alternativeText ||
-                          "Worker in Action"
-                        }
+                        src={getImageUrl(aboutData.teamImages[1].image)}
+                        alt={getImageAlt(
+                          aboutData.teamImages[1].image,
+                          "Worker in Action",
+                        )}
                         className="w-full h-full object-cover"
                       />
                     </div>

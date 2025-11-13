@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import SEO from "../shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
 interface SEOData {
   metaTitle: string;
@@ -47,7 +48,7 @@ async function getTradingData(): Promise<TradingData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<TradingData>(
-      "diverso-tradings",
+      "diverso-trading",
       {
         populate: {
           seo: {
@@ -213,8 +214,8 @@ export default async function TradingPage() {
                     }`}
                   >
                     <img
-                      src={project.image.url}
-                      alt={project.image.alternativeText || project.title}
+                      src={getImageUrl(project.image)}
+                      alt={getImageAlt(project.image, project.title)}
                       className="w-full h-full object-cover rounded"
                     />
                   </div>

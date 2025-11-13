@@ -2,8 +2,9 @@ import Header from "@/app/shared/components/Header";
 import Footer from "@/app/shared/components/Footer";
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import Link from "next/link";
 import {
   Phone,
@@ -161,7 +162,7 @@ interface HomeData {
 async function getHomeData(): Promise<HomeData | null> {
   try {
     const strapiService = new StrapiService();
-    const response = await strapiService.getContent<HomeData>("diverso-homes", {
+    const response = await strapiService.getContent<HomeData>("diverso-home", {
       populate: {
         seo: {
           populate: {
@@ -281,7 +282,7 @@ export default async function HomePage() {
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: `url(${homeData.heroSlides[0].image.url})`,
+                backgroundImage: `url(${getImageUrl(homeData.heroSlides[0].image)})`,
                 filter: "brightness(0.7)",
               }}
             />
@@ -379,11 +380,10 @@ export default async function HomePage() {
                   className="bg-white group hover:shadow-xl transition-all duration-300"
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={service.image.url}
-                      alt={service.image.alternativeText || service.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    <img
+                      src={getImageUrl(service.image)}
+                      alt={getImageAlt(service.image, service.title)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6">
@@ -416,14 +416,10 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <div className="relative h-[500px] w-full">
-                <Image
-                  src={homeData.aboutTeamImage.url}
-                  alt={
-                    homeData.aboutTeamImage.alternativeText ||
-                    "Diverso Team"
-                  }
-                  fill
-                  className="object-cover"
+                <img
+                  src={getImageUrl(homeData.aboutTeamImage)}
+                  alt={getImageAlt(homeData.aboutTeamImage, "Diverso Team")}
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute bottom-0 left-0 bg-success text-white p-6 max-w-sm shadow-lg">
@@ -505,11 +501,10 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 h-[350px]">
             {homeData.ctaImages.slice(0, 3).map((slide) => (
               <div key={slide.id} className="relative">
-                <Image
-                  src={slide.image.url}
-                  alt={slide.image.alternativeText || "CTA Image"}
-                  fill
-                  className="object-cover"
+                <img
+                  src={getImageUrl(slide.image)}
+                  alt={getImageAlt(slide.image, "CTA Image")}
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
@@ -589,15 +584,13 @@ export default async function HomePage() {
                       <div className="flex items-center gap-4 mb-4">
                         <div className="relative">
                           <div className="w-16 h-16 rounded-full bg-gray-300 overflow-hidden">
-                            <Image
-                              src={testimonial.avatar.url}
-                              alt={
-                                testimonial.avatar.alternativeText ||
-                                testimonial.name
-                              }
-                              width={64}
-                              height={64}
-                              className="object-cover"
+                            <img
+                              src={getImageUrl(testimonial.avatar)}
+                              alt={getImageAlt(
+                                testimonial.avatar,
+                                testimonial.name,
+                              )}
+                              className="w-full h-full object-cover"
                             />
                           </div>
                           {testimonial.verified && (
@@ -815,11 +808,10 @@ export default async function HomePage() {
                   className="group relative overflow-hidden cursor-pointer"
                 >
                   <div className="relative h-80 bg-neutral-gray-light">
-                    <Image
-                      src={project.image.url}
-                      alt={project.image.alternativeText || project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    <img
+                      src={getImageUrl(project.image)}
+                      alt={getImageAlt(project.image, project.title)}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
 
                     <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

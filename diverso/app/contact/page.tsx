@@ -61,7 +61,7 @@ export default function ContactPage() {
       try {
         const strapiService = new StrapiService();
         const response = await strapiService.getContent<ContactData>(
-          "diverso-contacts",
+          "diverso-contact",
           {
             populate: {
               seo: {

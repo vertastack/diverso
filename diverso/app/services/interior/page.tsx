@@ -9,9 +9,10 @@ import {
   MessageSquare,
 } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import SEO from "@/app/shared/components/Seo";
 import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 
 interface SEOData {
   metaTitle: string;
@@ -65,7 +66,7 @@ async function getInteriorData(): Promise<InteriorData | null> {
   try {
     const strapiService = new StrapiService();
     const response = await strapiService.getContent<InteriorData>(
-      "diverso-interior-services",
+      "diverso-interior-service",
       {
         populate: {
           seo: {
@@ -124,11 +125,10 @@ const InteriorSlider = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {images.map((imageData) => (
           <div key={imageData.id} className="relative h-64 bg-gray-200">
-            <Image
-              src={imageData.image.url}
-              alt={imageData.image.alternativeText || "Интериорно боядисване"}
-              fill
-              className="object-cover"
+            <img
+              src={getImageUrl(imageData.image)}
+              alt={getImageAlt(imageData.image, "Интериорно боядисване")}
+              className="w-full h-full object-cover"
             />
           </div>
         ))}
