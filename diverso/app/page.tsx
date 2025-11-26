@@ -2,6 +2,7 @@ import Header from "@/app/shared/components/Header";
 import Footer from "@/app/shared/components/Footer";
 import SEO from "@/app/shared/components/Seo";
 import HeroCarousel from "@/app/shared/components/HeroCarousel";
+import ContactForm from "@/app/shared/components/ContactForm";
 import StrapiService from "@/src/services/strapi.service";
 import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 import type { Metadata } from "next";
@@ -591,81 +592,13 @@ export default async function HomePage() {
             </div>
 
             <div className="bg-white p-8 md:p-12">
-              <div className="flex flex-col lg:flex-row gap-8">
-                <div className="lg:w-2/3">
-                  <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">
-                    {homeData.processFormTitle}
-                  </h2>
-                  <p className="text-neutral-charcoal mb-2">
-                    {homeData.processFormSubtitle}
-                  </p>
-                  <p className="text-neutral-charcoal mb-8">
-                    {homeData.processFormDescription}
-                  </p>
-
-                  <form className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <input
-                        type="text"
-                        placeholder="Volledige naam *"
-                        required
-                        className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
-                      />
-                      <input
-                        type="email"
-                        placeholder="E-mail *"
-                        required
-                        className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
-                      />
-                      <input
-                        type="tel"
-                        placeholder="Telefoonnummer *"
-                        required
-                        className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <input
-                        type="text"
-                        placeholder="Straatnaam en huisnummer *"
-                        required
-                        className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Plaats *"
-                        required
-                        className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
-                      />
-                    </div>
-                    <textarea
-                      placeholder="Eventuele opmerkingen/wensen"
-                      rows={4}
-                      className="w-full border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary resize-none"
-                    ></textarea>
-                  </form>
-                </div>
-
-                <div className="lg:w-1/3 flex flex-col justify-between">
-                  <div className="border-2 border-dashed border-primary p-6 mb-6">
-                    <div className="flex items-start gap-3">
-                      <MessageSquare
-                        className="text-primary shrink-0 mt-1"
-                        size={24}
-                      />
-                      <div>
-                        <p className="text-primary font-bold text-lg mb-2">
-                          {homeData.processCtaBoxTitle}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button className="bg-primary hover:bg-primary-red-dark text-white px-8 py-4 font-bold text-lg transition-colors w-full">
-                    {homeData.processSubmitButtonText}
-                  </button>
-                </div>
-              </div>
+              <ContactForm
+                title={homeData.processFormTitle}
+                subtitle={homeData.processFormSubtitle}
+                description={homeData.processFormDescription}
+                submitButtonText={homeData.processSubmitButtonText}
+                variant="compact"
+              />
             </div>
 
             <div className="bg-success text-white p-4 mt-8 flex items-start gap-3">

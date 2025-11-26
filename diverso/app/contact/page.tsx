@@ -2,6 +2,7 @@
 
 import Header from "@/app/shared/components/Header";
 import Footer from "@/app/shared/components/Footer";
+import ContactForm from "@/app/shared/components/ContactForm";
 import { Phone, MapPin, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import SEO from "../shared/components/Seo";
@@ -44,16 +45,6 @@ interface ContactData {
 }
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    street: "",
-    place: "",
-    workType: "",
-    message: "",
-  });
-
   const [contactData, setContactData] = useState<ContactData | null>(null);
 
   useEffect(() => {
@@ -113,23 +104,6 @@ export default function ContactPage() {
         metaUrl: "https://diverso.com",
       };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const location = contactData.companyInfo;
 
   return (
@@ -149,190 +123,19 @@ export default function ContactPage() {
       {/* Contact Form Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12">
-            {/* Header with Title and Phone */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
-              <div className="flex-1">
-                <h1 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">
-                  {contactData.pageTitle}
-                </h1>
-                <p className="text-gray-600 leading-relaxed">
-                  {contactData.pageDescription}
-                </p>
-              </div>
-              <div className="flex-shrink-0">
-                <div className="border-2 border-dashed border-primary px-6 py-4 inline-flex items-center gap-3">
-                  <Phone size={24} className="text-primary" />
-                  <div>
-                    <p className="text-primary font-bold text-lg">
-                      {contactData.phoneText}
-                    </p>
-                    <a
-                      href={`tel:${contactData.phoneNumber.replace(/\s/g, "")}`}
-                      className="text-neutral-dark font-bold text-xl hover:text-primary transition-colors"
-                    >
-                      {contactData.phoneNumber}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Row 1 */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label
-                    htmlFor="fullName"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Volledige naam *
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    required
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Volledige naam *"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    E-mail *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="E-mail *"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Telefoonnummer *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Telefoonnummer *"
-                  />
-                </div>
-              </div>
-
-              {/* Row 2 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="street"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Straatnaam en huisnummer
-                  </label>
-                  <input
-                    type="text"
-                    id="street"
-                    name="street"
-                    value={formData.street}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Straatnaam en huisnummer"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="place"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Plaats
-                  </label>
-                  <input
-                    type="text"
-                    id="place"
-                    name="place"
-                    value={formData.place}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Plaats"
-                  />
-                </div>
-              </div>
-
-              {/* Row 3 - Work Type */}
-              <div>
-                <label
-                  htmlFor="workType"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Type werkzaamheden
-                </label>
-                <select
-                  id="workType"
-                  name="workType"
-                  value={formData.workType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white"
-                >
-                  <option value="">Selecteer type werkzaamheden</option>
-                  <option value="interior">Binnen Schilderwerk</option>
-                  <option value="exterior">Buiten Schilderwerk</option>
-                  <option value="restoration">Restauratie</option>
-                  <option value="glass">Glaszetten</option>
-                  <option value="other">Anders</option>
-                </select>
-              </div>
-
-              {/* Message Textarea */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Bericht
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                  placeholder="Voer hier uw bericht in..."
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-4">
-                <button
-                  type="submit"
-                  className="bg-primary hover:bg-primary-red-dark text-white px-10 py-4 font-semibold text-lg transition-colors uppercase w-full md:w-auto"
-                >
-                  {contactData.formTitle}
-                </button>
-                <p className="text-gray-600 text-sm">
-                  {contactData.responseTime}
-                </p>
-              </div>
-            </form>
-          </div>
+          <ContactForm
+            title={contactData.pageTitle}
+            description={contactData.pageDescription}
+            phoneText={contactData.phoneText}
+            phoneNumber={contactData.phoneNumber}
+            submitButtonText={contactData.formTitle}
+            showPhoneBox={true}
+          />
+          {contactData.responseTime && (
+            <p className="text-center text-gray-600 text-sm mt-4">
+              {contactData.responseTime}
+            </p>
+          )}
         </div>
       </section>
 
