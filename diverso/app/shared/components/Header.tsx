@@ -57,15 +57,14 @@ const Header: React.FC = () => {
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <div className="mr-3">
-                <Image
-                  src="/logo.png" // Replace with your image path
-                  alt="Div Logo"
-                  width={96}
-                  height={96}
-                  className="rounded"
-                />
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Diverso Logo"
+                width={200}
+                height={80}
+                className="h-16 md:h-20 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Navigation Menu */}
