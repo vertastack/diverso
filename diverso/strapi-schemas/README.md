@@ -41,11 +41,12 @@ strapi-schemas/
 4. `diverso-trading` - diverso/Trading - Търговски услуги
 
 ### Services страници:
-5. `diverso-interior-service` - diverso/Interior Service - Интериорно боядисване
-6. `diverso-exterior-service` - diverso/Exterior Service - Външно боядисване
-7. `diverso-glazing-service` - diverso/Glazing Service - Остъкляване
-8. `diverso-wood-repair-service` - diverso/Wood Repair Service - Ремонт на гниеща дървесина
-9. `diverso-maintenance-plan-service` - diverso/Maintenance Plan Service - Многогодишен план
+5. `diverso-binnen-schilderwerk-service` - diverso/Binnen Schilderwerk Service - Вътрешно боядисване
+6. `diverso-buiten-schilderwerk-service` - diverso/Buiten Schilderwerk Service - Външно боядисване
+7. `diverso-houtrot-reparatie-service` - diverso/Houtrot Reparatie Service - Ремонт на гнила дървесина
+8. `diverso-glaszetten-service` - diverso/Glaszetten Service - Поставяне на стъкла
+9. `diverso-kunststof-kozijnen-plaatsen-service` - diverso/Kunststof Kozijnen Plaatsen Service - Монтаж на пластмасова дограма
+10. `diverso-decoratief-stucwerk-service` - diverso/Decoratief Stucwerk Service - Декоративна мазилка
 
 ## 📋 Компоненти (13 общо)
 
@@ -157,11 +158,12 @@ npm run develop
 - `GET /api/diverso-tradings` - Търговски услуги
 
 ### Service страници:
-- `GET /api/diverso-interior-services` - Интериорни услуги
-- `GET /api/diverso-exterior-services` - Екстериорни услуги
-- `GET /api/diverso-glazing-services` - Остъкляване услуги
-- `GET /api/diverso-wood-repair-services` - Ремонт на дървесина услуги
-- `GET /api/diverso-maintenance-plan-services` - План за поддръжка услуги
+- `GET /api/diverso-binnen-schilderwerk-services` - Услуги за вътрешно боядисване
+- `GET /api/diverso-buiten-schilderwerk-services` - Услуги за външно боядисване
+- `GET /api/diverso-houtrot-reparatie-services` - Услуги за ремонт на гнила дървесина
+- `GET /api/diverso-glaszetten-services` - Услуги за поставяне на стъкла
+- `GET /api/diverso-kunststof-kozijnen-plaatsen-services` - Услуги за монтаж на пластмасова дограма
+- `GET /api/diverso-decoratief-stucwerk-services` - Услуги за декоративна мазилка
 
 **Забележка:** Всички endpoints поддържат пълен CRUD (Create, Read, Update, Delete) благодарение на автоматично генерираните controller, service и routes файлове.
 

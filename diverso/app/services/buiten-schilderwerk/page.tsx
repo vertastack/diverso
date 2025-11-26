@@ -1,0 +1,451 @@
+import Header from "@/app/shared/components/Header";
+import Footer from "@/app/shared/components/Footer";
+import {
+  Phone,
+  Calendar,
+  Users,
+  Star,
+  CheckCircle,
+  MessageSquare,
+} from "lucide-react";
+import type { Metadata } from "next";
+
+import SEO from "@/app/shared/components/Seo";
+import StrapiService from "@/src/services/strapi.service";
+import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
+
+interface SEOData {
+  metaTitle: string;
+  metaDescription: string;
+  metaImage?: {
+    url: string;
+  };
+  metaKeywords?: string;
+  metaRobots?: string;
+  metaUrl?: string;
+}
+
+interface BuitenSchilderwerkData {
+  id: number;
+  seo: SEOData;
+  pageTitle: string;
+  pageDescription: string;
+  headerQuote: string;
+  mainTitle: string;
+  mainContent: string;
+  features: Array<{
+    id: number;
+    text: string;
+  }>;
+  galleryImages: Array<{
+    id: number;
+    image: {
+      url: string;
+      alternativeText?: string;
+    };
+  }>;
+  infoSectionTitle: string;
+  infoSectionContent: string;
+  ctaTitle: string;
+  ctaSubtitle: string;
+  phoneNumber: string;
+  processSteps: Array<{
+    id: number;
+    stepNumber: string;
+    title: string;
+    description: string;
+    icon: string;
+    bgColor: string;
+  }>;
+  formTitle: string;
+  formSubtitle: string;
+  noticeText: string;
+}
+
+async function getBuitenSchilderwerkData(): Promise<BuitenSchilderwerkData | null> {
+  try {
+    const strapiService = new StrapiService();
+    const response = await strapiService.getContent<BuitenSchilderwerkData>(
+      "diverso-buiten-schilderwerk-service",
+      {
+        populate: {
+          seo: {
+            populate: {
+              metaImage: "*",
+            },
+          },
+          features: "*",
+          galleryImages: {
+            populate: {
+              image: "*",
+            },
+          },
+          processSteps: "*",
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching buiten schilderwerk data:", error);
+    return null;
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const buitenSchilderwerkData = await getBuitenSchilderwerkData();
+
+  if (buitenSchilderwerkData && buitenSchilderwerkData.seo) {
+    return {
+      title: buitenSchilderwerkData.seo.metaTitle,
+      description: buitenSchilderwerkData.seo.metaDescription,
+    };
+  }
+
+  // Fallback metadata
+  return {
+    title: "Buiten Schilderwerk | Diverso",
+    description:
+      "Professioneel buitenschilderwerk voor uw huis of bedrijf. Ervaren schilders met meer dan 20 jaar ervaring in Zutphen en omgeving.",
+  };
+}
+
+// Image Slider Component
+const BuitenSchilderwerkSlider = ({
+  images,
+}: {
+  images: BuitenSchilderwerkData["galleryImages"];
+}) => {
+  if (!images || images.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="bg-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        {images.map((imageData) => (
+          <div key={imageData.id} className="relative h-64 bg-gray-200">
+            <img
+              src={getImageUrl(imageData.image)}
+              alt={getImageAlt(imageData.image, "Buiten schilderwerk")}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default async function BuitenSchilderwerkPage() {
+  const buitenSchilderwerkData = await getBuitenSchilderwerkData();
+
+  if (!buitenSchilderwerkData) {
+    return (
+      <>
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <p className="text-gray-600">Geen gegevens om te laden.</p>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  const seo = buitenSchilderwerkData.seo
+    ? {
+        metaTitle: buitenSchilderwerkData.seo.metaTitle,
+        metaDescription: buitenSchilderwerkData.seo.metaDescription,
+        metaImage: buitenSchilderwerkData.seo.metaImage || { url: "" },
+        metaKeywords: buitenSchilderwerkData.seo.metaKeywords || "",
+        metaRobots: buitenSchilderwerkData.seo.metaRobots || "index, follow",
+        metaUrl: buitenSchilderwerkData.seo.metaUrl || "https://diverso.com",
+      }
+    : {
+        metaTitle: "Buiten Schilderwerk | Diverso",
+        metaDescription: "Professionele diensten voor buitenschilderwerk.",
+        metaImage: { url: "" },
+        metaKeywords: "",
+        metaRobots: "index, follow",
+        metaUrl: "https://diverso.com",
+      };
+
+  return (
+    <>
+      <SEO seo={seo} />
+      <Header />
+
+      {/* Red Header Quote */}
+      <section className="bg-primary py-8">
+        <div className="container mx-auto px-4">
+          <p className="text-white text-center text-lg md:text-xl font-medium italic">
+            {buitenSchilderwerkData.headerQuote}
+          </p>
+        </div>
+      </section>
+
+      {/* Main Content Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Left Column - Main Content */}
+            <div className="lg:col-span-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-8">
+                {buitenSchilderwerkData.mainTitle}
+              </h1>
+
+              <div className="space-y-6 text-neutral-charcoal leading-relaxed">
+                {buitenSchilderwerkData.mainContent
+                  .split("\n\n")
+                  .map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+              </div>
+            </div>
+
+            {/* Right Column - Features Box */}
+            <div className="lg:col-span-1">
+              <div className="bg-secondary p-8 text-white sticky top-8">
+                <ul className="space-y-4">
+                  {buitenSchilderwerkData.features.map((feature, index) => (
+                    <li
+                      key={feature.id}
+                      className={`flex items-start gap-3 text-white ${
+                        index < buitenSchilderwerkData.features.length - 1
+                          ? "border-b border-white/20 pb-4"
+                          : ""
+                      }`}
+                    >
+                      <CheckCircle size={20} className="mt-1 shrink-0" />
+                      <span className="text-sm">{feature.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BuitenSchilderwerk Images Slider */}
+      <BuitenSchilderwerkSlider images={buitenSchilderwerkData.galleryImages} />
+
+      {/* Info Section */}
+      <section className="py-16 bg-neutral-gray-light">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6">
+            {buitenSchilderwerkData.infoSectionTitle}
+          </h2>
+          <div className="space-y-4 text-neutral-charcoal leading-relaxed max-w-5xl">
+            {buitenSchilderwerkData.infoSectionContent
+              .split("\n\n")
+              .map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Bar */}
+      <section className="bg-primary py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+            <div>
+              <p className="text-lg md:text-xl font-medium mb-2">
+                {buitenSchilderwerkData.ctaTitle}
+              </p>
+              <p className="text-lg">{buitenSchilderwerkData.ctaSubtitle}</p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+              <div className="flex items-center gap-2 bg-white text-primary px-5 py-3 border-2 border-dashed border-white">
+                <Phone size={20} />
+                <a
+                  href={`tel:${buitenSchilderwerkData.phoneNumber.replace(
+                    /\s/g,
+                    "",
+                  )}`}
+                  className="font-bold text-lg hover:underline"
+                >
+                  {buitenSchilderwerkData.phoneNumber}
+                </a>
+              </div>
+              <button className="bg-secondary hover:bg-secondary-teal-dark text-white px-6 py-3 font-semibold transition-colors">
+                NEEM CONTACT OP
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Steps */}
+      <section className="py-16 bg-neutral-gray-light">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {buitenSchilderwerkData.processSteps.map((step, index) => {
+              const isSecondary = step.bgColor === "secondary";
+              const IconComponent =
+                step.icon === "calendar"
+                  ? Calendar
+                  : step.icon === "users"
+                    ? Users
+                    : Star;
+
+              return (
+                <div key={step.id} className="relative">
+                  <div
+                    className={`${
+                      isSecondary
+                        ? "bg-secondary text-white"
+                        : "bg-white text-neutral-dark"
+                    } p-8 text-center relative`}
+                  >
+                    <div
+                      className={`absolute top-0 left-0 w-3 h-3 ${
+                        isSecondary ? "bg-white" : "bg-primary"
+                      }`}
+                    ></div>
+                    <div
+                      className={`absolute bottom-0 right-0 w-3 h-3 ${
+                        isSecondary ? "bg-white" : "bg-primary"
+                      }`}
+                    ></div>
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+                      <div
+                        className={`w-16 h-16 rounded-full border-2 border-dashed ${
+                          isSecondary
+                            ? "border-white bg-secondary"
+                            : "border-neutral-charcoal bg-white"
+                        } flex items-center justify-center`}
+                      >
+                        <span
+                          className={`text-2xl font-bold ${
+                            isSecondary ? "text-white" : "text-neutral-dark"
+                          }`}
+                        >
+                          {step.stepNumber}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-8 mb-6 flex justify-center">
+                      <IconComponent
+                        size={48}
+                        className={
+                          isSecondary ? "text-white" : "text-neutral-dark"
+                        }
+                      />
+                    </div>
+                    {index < buitenSchilderwerkData.processSteps.length - 1 && (
+                      <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                        <div className="text-neutral-gray text-4xl">→</div>
+                      </div>
+                    )}
+                    <h3
+                      className={`text-xl font-bold mb-4 ${
+                        isSecondary ? "text-white" : "text-neutral-dark"
+                      }`}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        isSecondary ? "text-white" : "text-neutral-charcoal"
+                      }`}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-white p-8 md:p-12">
+            <div className="flex flex-col lg:flex-row gap-8">
+              <div className="lg:w-2/3">
+                <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">
+                  {buitenSchilderwerkData.formTitle}
+                </h2>
+                <p className="text-neutral-charcoal mb-8">
+                  {buitenSchilderwerkData.formSubtitle}
+                </p>
+
+                <form className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Volledige naam *"
+                      required
+                      className="border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary"
+                    />
+                    <input
+                      type="email"
+                      placeholder="E-mailadres *"
+                      required
+                      className="border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Telefoonnummer *"
+                      required
+                      className="border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Straatnaam en huisnummer *"
+                      required
+                      className="border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Woonplaats *"
+                      required
+                      className="border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary"
+                    />
+                  </div>
+                  <textarea
+                    placeholder="Eventuele opmerkingen/wensen"
+                    rows={4}
+                    className="w-full border border-gray-300 px-4 py-3 focus:outline-none focus:border-primary resize-none"
+                  ></textarea>
+                </form>
+              </div>
+
+              <div className="lg:w-1/3 flex flex-col justify-between">
+                <div className="border-2 border-dashed border-primary p-6 mb-6">
+                  <div className="flex items-start gap-3">
+                    <MessageSquare
+                      className="text-primary shrink-0 mt-1"
+                      size={24}
+                    />
+                    <p className="text-primary font-bold text-lg">
+                      DIRECT CONTACT? VRAAG HET ONS!
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="bg-primary hover:bg-primary-red-dark text-white px-8 py-4 font-bold text-lg transition-colors w-full"
+                >
+                  VERZENDEN
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Notice */}
+          <div className="bg-success text-white p-4 mt-8 flex items-start gap-3">
+            <MessageSquare size={20} className="shrink-0 mt-1" />
+            <p className="text-sm">
+              <strong>{buitenSchilderwerkData.noticeText}</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </>
+  );
+}

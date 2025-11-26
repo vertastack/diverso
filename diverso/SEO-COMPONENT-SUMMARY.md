@@ -33,11 +33,12 @@ Successfully implemented a reusable SEO component (`diverso.seo`) across all Div
 - ✅ `diverso-trading` - Trading/commercial page
 
 ### Service Pages (6)
-- ✅ `diverso-interior-service` - Interior painting service
-- ✅ `diverso-exterior-service` - Exterior painting service
-- ✅ `diverso-glazing-service` - Window glazing service
-- ✅ `diverso-wood-repair-service` - Wood repair service
-- ✅ `diverso-maintenance-plan-service` - Maintenance plan service
+- ✅ `diverso-binnen-schilderwerk-service` - Binnen Schilderwerk service
+- ✅ `diverso-buiten-schilderwerk-service` - Buiten Schilderwerk service
+- ✅ `diverso-houtrot-reparatie-service` - Houtrot reparatie service
+- ✅ `diverso-glaszetten-service` - Glaszetten service
+- ✅ `diverso-kunststof-kozijnen-plaatsen-service` - Kunststof Kozijnen Plaatsen service
+- ✅ `diverso-decoratief-stucwerk-service` - Decoratief Stucwerk service
 
 **Before (per schema):**
 ```json
@@ -65,18 +66,19 @@ Successfully implemented a reusable SEO component (`diverso.seo`) across all Div
 }
 ```
 
-## ✅ Updated Pages (9 files)
+## ✅ Updated Pages (10 files)
 
 ### Frontend Pages Updated
 1. `diverso/app/page.tsx` - Home page
 2. `diverso/app/about/page.tsx` - About page
 3. `diverso/app/contact/page.tsx` - Contact page
 4. `diverso/app/trading/page.tsx` - Trading page
-5. `diverso/app/services/interior/page.tsx` - Interior service
-6. `diverso/app/services/exterior/page.tsx` - Exterior service
-7. `diverso/app/services/glazing/page.tsx` - Glazing service
-8. `diverso/app/services/wood-repair/page.tsx` - Wood repair service
-9. `diverso/app/services/maintenance-plan/page.tsx` - Maintenance plan service
+5. `diverso/app/services/binnen-schilderwerk/page.tsx` - Binnen Schilderwerk service
+6. `diverso/app/services/buiten-schilderwerk/page.tsx` - Buiten Schilderwerk service
+7. `diverso/app/services/houtrot-reparatie/page.tsx` - Houtrot reparatie service
+8. `diverso/app/services/glaszetten/page.tsx` - Glaszetten service
+9. `diverso/app/services/kunststof-kozijnen-plaatsen/page.tsx` - Kunststof Kozijnen Plaatsen service
+10. `diverso/app/services/decoratief-stucwerk/page.tsx` - Decoratief Stucwerk service
 
 ### Code Pattern Changes
 
@@ -258,9 +260,9 @@ return (
 
 ## ✅ Migration Complete
 
-**Result:** All 10 collection types and 9 frontend pages now use the unified SEO component approach, providing a cleaner, more maintainable, and user-friendly content management experience.
+**Result:** All 10 collection types and 10 frontend pages now use the unified SEO component approach, providing a cleaner, more maintainable, and user-friendly content management experience.
 
-**Files Modified:** 19 schema files + 9 page files + 2 documentation files = **30 files total**
+**Files Modified:** 20+ schema files + 10 page files + 2 documentation files = **32+ files total**
 
 **Lines of Code:** Reduced by ~200 lines through elimination of duplicate SEO field definitions
 
