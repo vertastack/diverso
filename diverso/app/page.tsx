@@ -1,6 +1,7 @@
 import Header from "@/app/shared/components/Header";
 import Footer from "@/app/shared/components/Footer";
 import SEO from "@/app/shared/components/Seo";
+import HeroCarousel from "@/app/shared/components/HeroCarousel";
 import StrapiService from "@/src/services/strapi.service";
 import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 import type { Metadata } from "next";
@@ -277,89 +278,14 @@ export default async function HomePage() {
 
       {/* Hero Section */}
       {homeData.heroSlides && homeData.heroSlides.length > 0 && (
-        <section className="relative">
-          <div className="relative h-[600px] lg:h-[700px]">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${getImageUrl(
-                  homeData.heroSlides[0].image
-                )})`,
-                filter: "brightness(0.7)",
-              }}
-            />
-            <div className="absolute inset-0 bg-black/30" />
-
-            <div className="relative container mx-auto px-4 h-full flex items-center">
-              <div className="max-w-3xl text-white">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                  {homeData.heroSlides[0].title}
-                </h1>
-                <p className="text-lg md:text-xl mb-6 opacity-90">
-                  {homeData.heroSlides[0].rating}
-                </p>
-                <p className="text-base md:text-lg mb-8 leading-relaxed max-w-2xl">
-                  {homeData.heroSlides[0].description}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="bg-white text-neutral-dark px-6 py-4 inline-flex items-center gap-3 border-2 border-dashed border-neutral-charcoal">
-                    <Phone size={24} className="text-neutral-dark" />
-                    <div>
-                      <p className="text-sm font-medium">
-                        Neem direct contact met ons op
-                      </p>
-                      <a
-                        href={`tel:${homeData.heroPhoneNumber.replace(
-                          /\s/g,
-                          ""
-                        )}`}
-                        className="text-xl font-bold hover:text-primary transition-colors"
-                      >
-                        {homeData.heroPhoneNumber}
-                      </a>
-                    </div>
-                  </div>
-                  <button className="bg-success hover:bg-success-dark text-white px-8 py-4 font-semibold text-lg transition-colors duration-300 inline-flex items-center justify-center">
-                    {homeData.heroCtaButtonText} &gt;
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Red Bar */}
-          <div className="bg-primary py-6">
-            <div className="container mx-auto px-4">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white">
-                <p className="text-lg md:text-xl font-medium text-center md:text-left">
-                  {homeData.heroBottomBarText}
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 shrink-0">
-                  <span className="text-base md:text-lg font-medium">
-                    {homeData.heroPhoneText}
-                  </span>
-                  <div className="flex items-center gap-2 bg-white text-primary px-3 md:px-4 py-2">
-                    <Phone size={18} className="md:w-5 md:h-5" />
-                    <a
-                      href={`tel:${homeData.heroPhoneNumber.replace(
-                        /\s/g,
-                        ""
-                      )}`}
-                      className="font-bold text-base md:text-lg hover:underline"
-                    >
-                      {homeData.heroPhoneNumber}
-                    </a>
-                  </div>
-                  <span className="text-base md:text-lg">of</span>
-                  <button className="bg-secondary hover:bg-secondary-teal-dark text-white px-4 md:px-6 py-2 font-semibold transition-colors text-sm md:text-base">
-                    neem contact met ons op.
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroCarousel
+          slides={homeData.heroSlides}
+          phoneNumber={homeData.heroPhoneNumber}
+          ctaButtonText={homeData.heroCtaButtonText}
+          bottomBarText={homeData.heroBottomBarText}
+          phoneText={homeData.heroPhoneText}
+          bottomBarButtonText="neem contact met ons op."
+        />
       )}
 
       {/* Services Section */}
