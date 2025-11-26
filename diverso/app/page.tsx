@@ -757,7 +757,7 @@ export default async function HomePage() {
       {homeData.galleryProjects && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12">
+            <div className="mb-12">
               <div className="lg:max-w-2xl">
                 <p className="text-primary text-sm font-semibold uppercase mb-4 tracking-wide">
                   {homeData.gallerySubtitle}
@@ -768,18 +768,6 @@ export default async function HomePage() {
                 <p className="text-neutral-charcoal leading-relaxed">
                   {homeData.galleryDescription}
                 </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2 border-2 border-dashed border-neutral-charcoal p-1 w-full lg:w-auto">
-                <button className="bg-primary text-white px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
-                  {homeData.galleryShowAllButtonText}
-                </button>
-                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
-                  {homeData.galleryExteriorButtonText}
-                </button>
-                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
-                  {homeData.galleryInteriorButtonText}
-                </button>
               </div>
             </div>
 
