@@ -1,4 +1,4 @@
-```"use strict";
+"use strict";
 
 /**
  * diverso-decoratief-stucwerk-service controller
