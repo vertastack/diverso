@@ -775,33 +775,26 @@ export default async function HomePage() {
               {homeData.galleryProjects.slice(0, 6).map((project) => (
                 <div
                   key={project.id}
-                  className="group relative overflow-hidden cursor-pointer"
+                  className="relative overflow-hidden"
                 >
                   <div className="relative h-64 md:h-80 bg-neutral-gray-light">
                     <img
                       src={getImageUrl(project.image)}
                       alt={getImageAlt(project.image, project.title)}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover"
                     />
-
-                    <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="text-center text-white p-6">
-                        <h3 className="text-xl font-bold mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm">Bekijk het project</p>
-                      </div>
-                    </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="text-center mt-12">
-              <button className="border-2 border-primary text-primary px-8 py-3 font-semibold hover:bg-primary hover:text-white transition-all duration-300">
-                {homeData.galleryLoadMoreButtonText}
-              </button>
-            </div>
+            {homeData.galleryProjects.length > 3 && (
+              <div className="text-center mt-12">
+                <button className="border-2 border-primary text-primary px-8 py-3 font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                  {homeData.galleryLoadMoreButtonText}
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
