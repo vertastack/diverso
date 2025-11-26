@@ -6,9 +6,6 @@ import Image from "next/image";
 import {
   Phone,
   Mail,
-  Facebook,
-  Linkedin,
-  MessageCircle,
   Menu,
   X,
   Home,
@@ -55,31 +52,6 @@ const Header: React.FC = () => {
               >
                 <Mail size={16} className="text-primary" />
                 <span>info@rsschildersgroep.nl</span>
-              </a>
-            </div>
-
-            {/* Social Media */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#"
-                className="text-gray-600 hover:text-primary transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={18} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-primary transition-colors"
-                aria-label="WhatsApp"
-              >
-                <MessageCircle size={18} />
               </a>
             </div>
           </div>

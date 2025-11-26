@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Facebook, Linkedin, MessageCircle } from "lucide-react";
+import React from "react";
 
 const Footer: React.FC = () => {
   return (
@@ -21,29 +21,6 @@ const Footer: React.FC = () => {
                 години, нашият доверен партньор и лице за контакт за най-добрите
                 бояджийски услуги: продължаваме напред заедно.
               </p>
-              <div className="flex items-center gap-4 mt-6">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={18} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
-                  aria-label="WhatsApp"
-                >
-                  <MessageCircle size={18} />
-                </a>
-              </div>
             </div>
 
             {/* Menu */}
