@@ -232,7 +232,7 @@ export default async function HomePage() {
       <>
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
-          <p className="text-gray-600">Няма данни за зареждане.</p>
+          <p className="text-gray-600">Geen gegevens om te laden.</p>
         </div>
         <Footer />
       </>
@@ -305,7 +305,7 @@ export default async function HomePage() {
                     <Phone size={24} className="text-neutral-dark" />
                     <div>
                       <p className="text-sm font-medium">
-                        Свържете се с нас директно
+                        Neem direct contact met ons op
                       </p>
                       <a
                         href={`tel:${homeData.heroPhoneNumber.replace(/\s/g, "")}`}
@@ -343,9 +343,9 @@ export default async function HomePage() {
                       {homeData.heroPhoneNumber}
                     </a>
                   </div>
-                  <span className="text-lg">или</span>
+                  <span className="text-lg">of</span>
                   <button className="bg-secondary hover:bg-secondary-teal-dark text-white px-6 py-2 font-semibold transition-colors">
-                    свържете се с нас.
+                    neem contact met ons op.
                   </button>
                 </div>
               </div>
@@ -399,7 +399,7 @@ export default async function HomePage() {
                     >
                       <span className="mr-2">■</span>
                       <span className="border-b-2 border-primary group-hover:border-primary-red-dark">
-                        Прочетете още
+                        Lees meer
                       </span>
                     </Link>
                   </div>
@@ -699,19 +699,19 @@ export default async function HomePage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <input
                         type="text"
-                        placeholder="Пълно име *"
+                        placeholder="Volledige naam *"
                         required
                         className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
                       />
                       <input
                         type="email"
-                        placeholder="Имейл *"
+                        placeholder="E-mail *"
                         required
                         className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
                       />
                       <input
                         type="tel"
-                        placeholder="Телефонен номер *"
+                        placeholder="Telefoonnummer *"
                         required
                         className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
                       />
@@ -719,19 +719,19 @@ export default async function HomePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input
                         type="text"
-                        placeholder="Име на улица и номер на къща *"
+                        placeholder="Straatnaam en huisnummer *"
                         required
                         className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
                       />
                       <input
                         type="text"
-                        placeholder="Място на пребиваване *"
+                        placeholder="Plaats *"
                         required
                         className="border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary"
                       />
                     </div>
                     <textarea
-                      placeholder="Всякакви коментари/пожелания"
+                      placeholder="Eventuele opmerkingen/wensen"
                       rows={4}
                       className="w-full border border-neutral-gray px-4 py-3 focus:outline-none focus:border-primary resize-none"
                     ></textarea>
@@ -819,7 +819,7 @@ export default async function HomePage() {
                         <h3 className="text-xl font-bold mb-2">
                           {project.title}
                         </h3>
-                        <p className="text-sm">Вижте проекта</p>
+                        <p className="text-sm">Bekijk het project</p>
                       </div>
                     </div>
                   </div>

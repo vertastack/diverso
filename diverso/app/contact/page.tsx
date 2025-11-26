@@ -87,7 +87,7 @@ export default function ContactPage() {
       <>
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
-          <p className="text-gray-600">Няма данни за зареждане.</p>
+          <p className="text-gray-600">Geen gegevens om te laden.</p>
         </div>
         <Footer />
       </>
@@ -187,7 +187,7 @@ export default function ContactPage() {
                     htmlFor="fullName"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Пълно име *
+                    Volledige naam *
                   </label>
                   <input
                     type="text"
@@ -197,7 +197,7 @@ export default function ContactPage() {
                     value={formData.fullName}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Пълно име *"
+                    placeholder="Volledige naam *"
                   />
                 </div>
                 <div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Имейл *
+                    E-mail *
                   </label>
                   <input
                     type="email"
@@ -215,7 +215,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Имейл *"
+                    placeholder="E-mail *"
                   />
                 </div>
                 <div>
@@ -223,7 +223,7 @@ export default function ContactPage() {
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Телефонен номер *
+                    Telefoonnummer *
                   </label>
                   <input
                     type="tel"
@@ -233,7 +233,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Телефонен номер *"
+                    placeholder="Telefoonnummer *"
                   />
                 </div>
               </div>
@@ -245,7 +245,7 @@ export default function ContactPage() {
                     htmlFor="street"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Име на улица и номер на къща
+                    Straatnaam en huisnummer
                   </label>
                   <input
                     type="text"
@@ -254,7 +254,7 @@ export default function ContactPage() {
                     value={formData.street}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Име на улица и номер на къща"
+                    placeholder="Straatnaam en huisnummer"
                   />
                 </div>
                 <div>
@@ -262,7 +262,7 @@ export default function ContactPage() {
                     htmlFor="place"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Име на място
+                    Plaats
                   </label>
                   <input
                     type="text"
@@ -271,7 +271,7 @@ export default function ContactPage() {
                     value={formData.place}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Име на място"
+                    placeholder="Plaats"
                   />
                 </div>
               </div>
@@ -291,12 +291,12 @@ export default function ContactPage() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none bg-white"
                 >
-                  <option value="">Изберете тип работа</option>
-                  <option value="interior">Интериорно боядисване</option>
-                  <option value="exterior">Външно боядисване</option>
-                  <option value="restoration">Реставрация</option>
-                  <option value="glass">Остъкляване</option>
-                  <option value="other">Друго</option>
+                  <option value="">Selecteer type werkzaamheden</option>
+                  <option value="interior">Binnen Schilderwerk</option>
+                  <option value="exterior">Buiten Schilderwerk</option>
+                  <option value="restoration">Restauratie</option>
+                  <option value="glass">Glaszetten</option>
+                  <option value="other">Anders</option>
                 </select>
               </div>
 
@@ -306,7 +306,7 @@ export default function ContactPage() {
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Съобщение
+                  Bericht
                 </label>
                 <textarea
                   id="message"
@@ -315,7 +315,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
-                  placeholder="Въведете съобщението си тук..."
+                  placeholder="Voer hier uw bericht in..."
                 />
               </div>
 
@@ -346,7 +346,7 @@ export default function ContactPage() {
             {/* Left Column - Location Info */}
             <div>
               <p className="text-primary text-sm font-semibold uppercase mb-2">
-                ЕДНО ПОСТОЯННО ЛИЦЕ ЗА КОНТАКТ
+                ÉÉN VAST AANSPREEKPUNT
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6 uppercase">
                 {contactData.locationSectionTitle}

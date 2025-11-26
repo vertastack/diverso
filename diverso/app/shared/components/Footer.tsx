@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import React from "react";
+import { Facebook, Linkedin, MessageCircle } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -15,18 +15,41 @@ const Footer: React.FC = () => {
                 Diverso
               </h4>
               <p className="text-white/80 text-sm leading-relaxed">
-                Бояджийска компания, базирана в Зутфен, предлагаща боядисване,
-                реставрация, ремонт на гипсена дърворезба, шпакловане,
-                довършителни работи по стените и остъкляване. Повече от 20
-                години, нашият доверен партньор и лице за контакт за най-добрите
-                бояджийски услуги: продължаваме напред заедно.
+                Schildersbedrijf gevestigd in Zutphen, gespecialiseerd in schilderwerk,
+                restauratie, reparatie van rottend hout, stucwerk,
+                afwerkingswerk aan muren en glaszetten. Meer dan 20
+                jaar ervaring, uw betrouwbare partner en aanspreekpunt voor de beste
+                schildersdiensten: samen vooruit.
               </p>
+              <div className="flex items-center gap-4 mt-6">
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={18} />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary-teal-dark transition-colors"
+                  aria-label="WhatsApp"
+                >
+                  <MessageCircle size={18} />
+                </a>
+              </div>
             </div>
 
             {/* Menu */}
             <div>
               <h4 className="text-lg font-bold mb-4 border-b-2 border-primary inline-block pb-1">
-                МЕНЮ
+                MENU
               </h4>
               <ul className="space-y-2">
                 <li>
@@ -34,7 +57,7 @@ const Footer: React.FC = () => {
                     href="/"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Начало
+                    ☑ Home
                   </Link>
                 </li>
                 <li>
@@ -42,7 +65,7 @@ const Footer: React.FC = () => {
                     href="/services/maintenance-plan"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Многогодишен план за поддръжка
+                    ☑ Meerjarenonderhoudsplan
                   </Link>
                 </li>
                 <li>
@@ -50,7 +73,7 @@ const Footer: React.FC = () => {
                     href="/references"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Референции
+                    ☑ Referenties
                   </Link>
                 </li>
                 <li>
@@ -58,7 +81,7 @@ const Footer: React.FC = () => {
                     href="/trading"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Търговски
+                    ☑ Zakelijk
                   </Link>
                 </li>
                 <li>
@@ -66,7 +89,7 @@ const Footer: React.FC = () => {
                     href="/about"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ За нас
+                    ☑ Over ons
                   </Link>
                 </li>
                 <li>
@@ -74,7 +97,7 @@ const Footer: React.FC = () => {
                     href="/contact"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Контакт
+                    ☑ Contact
                   </Link>
                 </li>
               </ul>
@@ -83,7 +106,7 @@ const Footer: React.FC = () => {
             {/* Services */}
             <div>
               <h4 className="text-lg font-bold mb-4 border-b-2 border-primary inline-block pb-1">
-                НАШИТЕ УСЛУГИ
+                ONZE DIENSTEN
               </h4>
               <ul className="space-y-2">
                 <li>
@@ -91,7 +114,7 @@ const Footer: React.FC = () => {
                     href="/services/interior"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Интериорно боядисване
+                    ☑ Binnen Schilderwerk
                   </Link>
                 </li>
                 <li>
@@ -99,15 +122,7 @@ const Footer: React.FC = () => {
                     href="/services/exterior"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Външно боядисване
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/services/glazing"
-                    className="text-white/70 hover:text-white transition-colors text-sm"
-                  >
-                    ☑ Остъкляване
+                    ☑ Buiten Schilderwerk
                   </Link>
                 </li>
                 <li>
@@ -115,7 +130,31 @@ const Footer: React.FC = () => {
                     href="/services/wood-repair"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
-                    ☑ Ремонт на гипсена дърворезба
+                    ☑ Houtrot reparatie
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services/glazing"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
+                    ☑ Glaszetten
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services/kozijnen"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
+                    ☑ Kunststof Kozijnen Plaatsen
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services/stucwerk"
+                    className="text-white/70 hover:text-white transition-colors text-sm"
+                  >
+                    ☑ Decoratief Stucwerk
                   </Link>
                 </li>
               </ul>
@@ -124,7 +163,7 @@ const Footer: React.FC = () => {
             {/* Contact Info */}
             <div>
               <h4 className="text-lg font-bold mb-4 border-b-2 border-primary inline-block pb-1">
-                ДАННИ ЗА КОНТАКТ
+                CONTACTGEGEVENS
               </h4>
               <div className="space-y-3 text-sm">
                 <p className="text-white/90">
@@ -136,7 +175,7 @@ const Footer: React.FC = () => {
                   7207 BJ Zutphen
                 </p>
                 <p className="text-white/70">
-                  Тел.:{" "}
+                  Tel.:{" "}
                   <a
                     href="tel:0575540147"
                     className="hover:text-white transition-colors"
@@ -145,7 +184,7 @@ const Footer: React.FC = () => {
                   </a>
                 </p>
                 <p className="text-white/70">
-                  Поща:{" "}
+                  E-mail:{" "}
                   <a
                     href="mailto:info@rsschildersgroep.nl"
                     className="hover:text-white transition-colors"
@@ -163,9 +202,9 @@ const Footer: React.FC = () => {
       <div className="border-t border-white/10 py-4">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center gap-4 text-sm text-white/60">
-            <span>© Авторско право</span>
+            <span>© Auteursrecht</span>
             <span>■</span>
-            <span>РС Шилдърсгроеп БВ- Реализация от■ Ефективен</span>
+            <span>Diverso - Realisatie door■ Effectief</span>
           </div>
         </div>
       </div>

@@ -99,7 +99,7 @@ export default async function TradingPage() {
       <>
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
-          <p className="text-gray-600">Няма данни за зареждане.</p>
+          <p className="text-gray-600">Geen gegevens om te laden.</p>
         </div>
         <Footer />
       </>
@@ -159,7 +159,7 @@ export default async function TradingPage() {
             {/* Right Column - Organizations List */}
             <div className="bg-secondary p-8">
               <h2 className="text-xl font-bold text-white mb-6 uppercase">
-                ОРГАНИЗАЦИИ КОИТО НИ СЕ ДОВЕРЯВАТ:
+                ORGANISATIES DIE ONS VERTROUWEN:
               </h2>
               <ul className="space-y-3">
                 {tradingData.organizationsList.map((org) => (
@@ -231,11 +231,11 @@ export default async function TradingPage() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              ГОТОВИ СТЕ ЛИ ДА СЕ СВЪРЖЕТЕ С НАС?
+              BENT U KLAAR OM CONTACT MET ONS OP TE NEMEN?
             </h2>
             <p className="text-white text-lg mb-8 leading-relaxed">
-              Свържете се с нас за безплатна консултация и персонализирана
-              оферта за вашия проект.
+              Neem contact met ons op voor gratis advies en een op maat gemaakte
+              offerte voor uw project.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <div className="flex items-center gap-3 bg-white text-primary px-6 py-4 border-2 border-dashed border-white">
@@ -251,7 +251,7 @@ export default async function TradingPage() {
                 href="/contact"
                 className="bg-secondary hover:bg-secondary-teal-dark text-white px-8 py-4 font-semibold transition-colors inline-flex items-center gap-2"
               >
-                СВЪРЖЕТЕ СЕ С НАС
+                NEEM CONTACT OP
                 <ArrowRight size={20} />
               </Link>
             </div>

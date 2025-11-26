@@ -94,7 +94,7 @@ export default async function AboutPage() {
       <>
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
-          <p className="text-gray-600">Няма данни за зареждане.</p>
+          <p className="text-gray-600">Geen gegevens om te laden.</p>
         </div>
         <Footer />
       </>

@@ -6,6 +6,9 @@ import Image from "next/image";
 import {
   Phone,
   Mail,
+  Facebook,
+  Linkedin,
+  MessageCircle,
   Menu,
   X,
   Home,
@@ -44,7 +47,7 @@ const Header: React.FC = () => {
                 className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
               >
                 <Phone size={16} className="text-primary" />
-                <span>Обадете ни се на: 0575 - 540 147</span>
+                <span>Bel ons op: 0575 - 540 147</span>
               </a>
               <a
                 href="mailto:info@rsschildersgroep.nl"
@@ -52,6 +55,31 @@ const Header: React.FC = () => {
               >
                 <Mail size={16} className="text-primary" />
                 <span>info@rsschildersgroep.nl</span>
+              </a>
+            </div>
+
+            {/* Social Media */}
+            <div className="flex items-center gap-3">
+              <a
+                href="#"
+                className="text-gray-600 hover:text-primary transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="#"
+                className="text-gray-600 hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="#"
+                className="text-gray-600 hover:text-primary transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={18} />
               </a>
             </div>
           </div>
@@ -81,14 +109,14 @@ const Header: React.FC = () => {
                 href="/"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
-                Начало
+                Home
               </Link>
               <div className="relative inline-block text-left">
                 {/* Dropdown menu */}
                 <div className="relative group">
                   {/* Dropdown button */}
                   <button className="text-gray-700 hover:text-primary transition-colors font-medium flex items-center gap-1">
-                    Услуги
+                    Diensten
                     <svg
                       className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180"
                       fill="none"
@@ -106,36 +134,42 @@ const Header: React.FC = () => {
                   </button>
 
                   {/* Dropdown menu */}
-                  <div className="absolute left-0 mt-2 w-52 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-10">
+                  <div className="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-10">
                     <Link
                       href="/services/interior"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg"
                     >
-                      Интериорно боядисване
+                      Binnen Schilderwerk
                     </Link>
                     <Link
                       href="/services/exterior"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
-                      Външно боядисване
-                    </Link>
-                    <Link
-                      href="/services/glazing"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg"
-                    >
-                      Остъкляване
+                      Buiten Schilderwerk
                     </Link>
                     <Link
                       href="/services/wood-repair"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
-                      Ремонт на гниеща дървесина
+                      Houtrot reparatie
                     </Link>
                     <Link
-                      href="/services/maintenance-plan"
+                      href="/services/glazing"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Glaszetten
+                    </Link>
+                    <Link
+                      href="/services/kozijnen"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Kunststof Kozijnen Plaatsen
+                    </Link>
+                    <Link
+                      href="/services/stucwerk"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg"
                     >
-                      Многогодишен план
+                      Decoratief Stucwerk
                     </Link>
                   </div>
                 </div>
@@ -144,7 +178,7 @@ const Header: React.FC = () => {
                 href="/trading"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
-                Търговски
+                Zakelijk
               </Link>
               {/* <Link
                 href="/references"
@@ -156,13 +190,13 @@ const Header: React.FC = () => {
                 href="/about"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
-                За нас
+                Over ons
               </Link>
               <Link
                 href="/contact"
                 className="text-gray-700 hover:text-primary transition-colors font-medium"
               >
-                Контакт
+                Contact
               </Link>
             </nav>
 
@@ -172,7 +206,7 @@ const Header: React.FC = () => {
                 href="/contact"
                 className="bg-primary text-white px-6 py-3 font-medium hover:bg-primary-red-dark transition-colors inline-flex items-center justify-center"
               >
-                Оферта
+                Offerte
               </Link>
             </div>
 
@@ -251,28 +285,42 @@ const Header: React.FC = () => {
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
-                    Интериорно боядисване
+                    Binnen Schilderwerk
                   </Link>
                   <Link
                     href="/services/exterior"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
-                    Външно боядисване
+                    Buiten Schilderwerk
                   </Link>
                   <Link
-                    href="/services/glass"
+                    href="/services/wood-repair"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
-                    Остъкляване
+                    Houtrot reparatie
                   </Link>
                   <Link
-                    href="/services/restoration"
+                    href="/services/glazing"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
-                    Ремонт на гипсена дърворезба
+                    Glaszetten
+                  </Link>
+                  <Link
+                    href="/services/kozijnen"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Kunststof Kozijnen Plaatsen
+                  </Link>
+                  <Link
+                    href="/services/stucwerk"
+                    onClick={closeMobileMenu}
+                    className="block text-white/80 hover:text-primary transition-colors py-2"
+                  >
+                    Decoratief Stucwerk
                   </Link>
                 </div>
               )}
@@ -314,7 +362,7 @@ const Header: React.FC = () => {
           {/* Contact Information */}
           <div className="px-6 py-8 mt-auto">
             <h3 className="text-white font-bold text-lg mb-4">
-              Информация за контакт
+              Contactinformatie
             </h3>
             <div className="space-y-2 text-white/90 text-sm">
               <p>Extended Ooyerhoekseweg 16</p>
