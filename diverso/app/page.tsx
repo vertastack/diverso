@@ -282,7 +282,9 @@ export default async function HomePage() {
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: `url(${getImageUrl(homeData.heroSlides[0].image)})`,
+                backgroundImage: `url(${getImageUrl(
+                  homeData.heroSlides[0].image
+                )})`,
                 filter: "brightness(0.7)",
               }}
             />
@@ -308,7 +310,10 @@ export default async function HomePage() {
                         Neem direct contact met ons op
                       </p>
                       <a
-                        href={`tel:${homeData.heroPhoneNumber.replace(/\s/g, "")}`}
+                        href={`tel:${homeData.heroPhoneNumber.replace(
+                          /\s/g,
+                          ""
+                        )}`}
                         className="text-xl font-bold hover:text-primary transition-colors"
                       >
                         {homeData.heroPhoneNumber}
@@ -330,21 +335,24 @@ export default async function HomePage() {
                 <p className="text-lg md:text-xl font-medium text-center md:text-left">
                   {homeData.heroBottomBarText}
                 </p>
-                <div className="flex items-center gap-3 shrink-0">
-                  <span className="text-lg font-medium">
+                <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 shrink-0">
+                  <span className="text-base md:text-lg font-medium">
                     {homeData.heroPhoneText}
                   </span>
-                  <div className="flex items-center gap-2 bg-white text-primary px-4 py-2">
-                    <Phone size={20} />
+                  <div className="flex items-center gap-2 bg-white text-primary px-3 md:px-4 py-2">
+                    <Phone size={18} className="md:w-5 md:h-5" />
                     <a
-                      href={`tel:${homeData.heroPhoneNumber.replace(/\s/g, "")}`}
-                      className="font-bold text-lg hover:underline"
+                      href={`tel:${homeData.heroPhoneNumber.replace(
+                        /\s/g,
+                        ""
+                      )}`}
+                      className="font-bold text-base md:text-lg hover:underline"
                     >
                       {homeData.heroPhoneNumber}
                     </a>
                   </div>
-                  <span className="text-lg">of</span>
-                  <button className="bg-secondary hover:bg-secondary-teal-dark text-white px-6 py-2 font-semibold transition-colors">
+                  <span className="text-base md:text-lg">of</span>
+                  <button className="bg-secondary hover:bg-secondary-teal-dark text-white px-4 md:px-6 py-2 font-semibold transition-colors text-sm md:text-base">
                     neem contact met ons op.
                   </button>
                 </div>
@@ -415,14 +423,14 @@ export default async function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="relative h-[500px] w-full">
+              <div className="relative h-[400px] md:h-[500px] w-full">
                 <img
                   src={getImageUrl(homeData.aboutTeamImage)}
                   alt={getImageAlt(homeData.aboutTeamImage, "Diverso Team")}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 bg-success text-white p-6 max-w-sm shadow-lg">
+              <div className="absolute bottom-0 left-0 bg-success text-white p-4 md:p-6 max-w-sm shadow-lg">
                 <div className="flex items-start gap-4">
                   <div className="bg-white rounded-full p-3 shrink-0">
                     <Award className="text-success" size={32} />
@@ -498,7 +506,7 @@ export default async function HomePage() {
       {/* CTA Section */}
       {homeData.ctaImages && (
         <section className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 h-[350px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 h-[250px] md:h-[350px]">
             {homeData.ctaImages.slice(0, 3).map((slide) => (
               <div key={slide.id} className="relative">
                 <img
@@ -516,21 +524,21 @@ export default async function HomePage() {
                 <p className="text-lg md:text-xl text-center max-w-4xl leading-relaxed">
                   {homeData.ctaMainQuestion}
                 </p>
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <span className="text-base font-medium">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+                  <span className="text-sm md:text-base font-medium">
                     {homeData.ctaPhoneText}
                   </span>
-                  <div className="flex items-center gap-2 bg-white text-primary px-5 py-3 border-2 border-dashed border-white">
-                    <Phone size={20} />
+                  <div className="flex items-center gap-2 bg-white text-primary px-4 md:px-5 py-2 md:py-3 border-2 border-dashed border-white">
+                    <Phone size={18} className="md:w-5 md:h-5" />
                     <a
                       href={`tel:${homeData.ctaPhoneNumber.replace(/\s/g, "")}`}
-                      className="font-bold text-lg hover:underline"
+                      className="font-bold text-base md:text-lg hover:underline"
                     >
                       {homeData.ctaPhoneNumber}
                     </a>
                   </div>
-                  <span className="text-base">{homeData.ctaOrText}</span>
-                  <button className="bg-transparent hover:bg-white hover:text-primary border-2 border-white text-white px-6 py-3 font-semibold transition-all duration-300 underline">
+                  <span className="text-sm md:text-base">{homeData.ctaOrText}</span>
+                  <button className="bg-transparent hover:bg-white hover:text-primary border-2 border-white text-white px-4 md:px-6 py-2 md:py-3 font-semibold transition-all duration-300 underline text-sm md:text-base">
                     {homeData.ctaButtonText}
                   </button>
                 </div>
@@ -542,100 +550,74 @@ export default async function HomePage() {
 
       {/* Testimonials Section */}
       {homeData.testimonials && (
-        <section className="py-16 bg-neutral-gray-light">
+        <section className="pt-20 md:pt-24 pb-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-4">
-                <p className="text-primary text-sm font-semibold uppercase mb-4 tracking-wide">
-                  {homeData.testimonialsSubtitle}
-                </p>
-                <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6">
+            <div className="max-w-6xl mx-auto">
+              {/* Header Section */}
+              <div className="text-center mb-12 md:mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-6 md:mb-8 mt-4 md:mt-6">
                   {homeData.testimonialsTitle}
                 </h2>
-                <p className="text-neutral-charcoal leading-relaxed mb-8">
+                <p className="text-neutral-charcoal leading-relaxed max-w-3xl mx-auto mb-8">
                   {homeData.testimonialsDescription}
                 </p>
-
-                <div className="space-y-4">
-                  <a
-                    href={homeData.testimonialsGoogleReviewsUrl}
-                    className="flex items-center justify-center gap-3 border-2 border-dashed border-neutral-charcoal text-neutral-dark px-6 py-3 font-semibold hover:bg-neutral-dark hover:text-white hover:border-neutral-dark transition-all duration-300"
-                  >
-                    <span>{homeData.testimonialsGoogleReviewsText}</span>
-                    <span className="text-xl">G</span>
-                  </a>
-                  <a
-                    href={homeData.testimonialsTrustpilotReviewsUrl}
-                    className="flex items-center justify-center gap-3 border-2 border-dashed border-neutral-charcoal text-neutral-dark px-6 py-3 font-semibold hover:bg-neutral-dark hover:text-white hover:border-neutral-dark transition-all duration-300"
-                  >
-                    <span>{homeData.testimonialsTrustpilotReviewsText}</span>
-                    <Star size={20} fill="currentColor" />
-                  </a>
-                </div>
               </div>
 
-              <div className="lg:col-span-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {homeData.testimonials.slice(0, 4).map((testimonial) => (
-                    <div
-                      key={testimonial.id}
-                      className="bg-white p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
-                    >
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="relative">
-                          <div className="w-16 h-16 rounded-full bg-gray-300 overflow-hidden">
-                            <img
-                              src={getImageUrl(testimonial.avatar)}
-                              alt={getImageAlt(
-                                testimonial.avatar,
-                                testimonial.name,
-                              )}
-                              className="w-full h-full object-cover"
+              {/* Testimonials Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                {homeData.testimonials.slice(0, 4).map((testimonial) => (
+                  <div
+                    key={testimonial.id}
+                    className="bg-white border-2 border-gray-100 p-6 hover:border-primary hover:shadow-lg transition-all duration-300 rounded-lg"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="relative">
+                        <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img
+                            src={getImageUrl(testimonial.avatar)}
+                            alt={getImageAlt(
+                              testimonial.avatar,
+                              testimonial.name
+                            )}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        {testimonial.verified && (
+                          <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1">
+                            <CheckCircle
+                              size={14}
+                              className="text-white"
+                              fill="white"
                             />
                           </div>
-                          {testimonial.verified && (
-                            <div className="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1">
-                              <CheckCircle
-                                size={16}
-                                className="text-white"
-                                fill="white"
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-neutral-dark">
-                            {testimonial.name}
-                          </h3>
-                          <p className="text-sm text-neutral-charcoal">
-                            {testimonial.date}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-1 mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={20}
-                            className="text-yellow-400"
-                            fill="#fbbf24"
-                          />
-                        ))}
-                        {testimonial.verified && (
-                          <CheckCircle
-                            size={16}
-                            className="text-blue-500 ml-1"
-                          />
                         )}
                       </div>
-
-                      <p className="text-neutral-charcoal leading-relaxed">
-                        {testimonial.review}
-                      </p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-neutral-dark text-sm truncate">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-xs text-neutral-charcoal">
+                          {testimonial.date}
+                        </p>
+                      </div>
                     </div>
-                  ))}
-                </div>
+
+                    <div className="flex items-center gap-1 mb-3">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={16}
+                          className="text-yellow-400"
+                          fill="#fbbf24"
+                        />
+                      ))}
+                    </div>
+
+                    <p className="text-neutral-charcoal text-sm leading-relaxed line-clamp-4">
+                      {testimonial.review}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -646,10 +628,10 @@ export default async function HomePage() {
       {homeData.processSteps && (
         <section className="py-16 bg-neutral-gray-light">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
               {homeData.processSteps.map((step, index) => (
                 <div key={step.id} className="relative">
-                  <div className="bg-white p-8 text-center relative">
+                  <div className="bg-white p-6 md:p-8 text-center relative">
                     <div className="absolute top-0 left-0 w-3 h-3 bg-primary"></div>
                     <div className="absolute bottom-0 right-0 w-3 h-3 bg-primary"></div>
 
@@ -666,7 +648,7 @@ export default async function HomePage() {
                     </div>
 
                     {index < homeData.processSteps.length - 1 && (
-                      <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                      <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
                         <div className="text-neutral-gray text-4xl">→</div>
                       </div>
                     )}
@@ -788,14 +770,14 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <div className="flex gap-2 border-2 border-dashed border-neutral-charcoal p-1">
-                <button className="bg-primary text-white px-6 py-3 font-semibold transition-all">
+              <div className="flex flex-wrap gap-2 border-2 border-dashed border-neutral-charcoal p-1 w-full lg:w-auto">
+                <button className="bg-primary text-white px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
                   {homeData.galleryShowAllButtonText}
                 </button>
-                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-6 py-3 font-semibold transition-all">
+                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
                   {homeData.galleryExteriorButtonText}
                 </button>
-                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-6 py-3 font-semibold transition-all">
+                <button className="bg-white text-neutral-dark hover:bg-neutral-gray-light px-4 md:px-6 py-2 md:py-3 font-semibold transition-all text-sm md:text-base flex-1 lg:flex-none">
                   {homeData.galleryInteriorButtonText}
                 </button>
               </div>
@@ -807,7 +789,7 @@ export default async function HomePage() {
                   key={project.id}
                   className="group relative overflow-hidden cursor-pointer"
                 >
-                  <div className="relative h-80 bg-neutral-gray-light">
+                  <div className="relative h-64 md:h-80 bg-neutral-gray-light">
                     <img
                       src={getImageUrl(project.image)}
                       alt={getImageAlt(project.image, project.title)}
