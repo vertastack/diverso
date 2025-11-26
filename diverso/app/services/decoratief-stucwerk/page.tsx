@@ -1,4 +1,4 @@
-```import Header from "@/app/shared/components/Header";
+import Header from "@/app/shared/components/Header";
 import Footer from "@/app/shared/components/Footer";
 import {
   Phone,
@@ -210,11 +210,12 @@ export default async function DecoratiefStucwerkPage() {
                   {decoratiefStucwerkData.features.map((feature, index) => (
                     <li
                       key={feature.id}
-                      className={`flex items-start gap-3 text-white ${
-                        index < decoratiefStucwerkData.features.length - 1
+                      className={
+                        "flex items-start gap-3 text-white " +
+                        (index < decoratiefStucwerkData.features.length - 1
                           ? "border-b border-white/20 pb-4"
-                          : ""
-                      }`}
+                          : "")
+                      }
                     >
                       <CheckCircle size={20} className="mt-1 shrink-0" />
                       <span className="text-sm">{feature.text}</span>
@@ -287,8 +288,8 @@ export default async function DecoratiefStucwerkPage() {
                 step.icon === "calendar"
                   ? Calendar
                   : step.icon === "users"
-                  ? Users
-                  : Star;
+                    ? Users
+                    : Star;
 
               return (
                 <div key={step.id} className="relative">
@@ -334,8 +335,7 @@ export default async function DecoratiefStucwerkPage() {
                         }
                       />
                     </div>
-                    {index <
-                      decoratiefStucwerkData.processSteps.length - 1 && (
+                    {index < decoratiefStucwerkData.processSteps.length - 1 && (
                       <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
                         <div className="text-neutral-gray text-4xl">→</div>
                       </div>

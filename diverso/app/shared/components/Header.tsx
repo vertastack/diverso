@@ -3,14 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Phone,
-  Mail,
-  Menu,
-  X,
-  Home,
-  ChevronDown,
-} from "lucide-react";
+import { Phone, Mail, Menu, X, Home, ChevronDown } from "lucide-react";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -108,37 +101,37 @@ const Header: React.FC = () => {
                   {/* Dropdown menu */}
                   <div className="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 z-10">
                     <Link
-                      href="/services/interior"
+                      href="/services/binnen-schilderwerk"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-t-lg"
                     >
                       Binnen Schilderwerk
                     </Link>
                     <Link
-                      href="/services/exterior"
+                      href="/services/buiten-schilderwerk"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
                       Buiten Schilderwerk
                     </Link>
                     <Link
-                      href="/services/wood-repair"
+                      href="/services/houtrot-reparatie"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
                       Houtrot reparatie
                     </Link>
                     <Link
-                      href="/services/glazing"
+                      href="/services/glaszetten"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
                       Glaszetten
                     </Link>
                     <Link
-                      href="/services/kozijnen"
+                      href="/services/kunststof-kozijnen-plaatsen"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
                       Kunststof Kozijnen Plaatsen
                     </Link>
                     <Link
-                      href="/services/stucwerk"
+                      href="/services/decoratief-stucwerk"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-b-lg"
                     >
                       Decoratief Stucwerk
@@ -253,42 +246,42 @@ const Header: React.FC = () => {
               {isServicesOpen && (
                 <div className="pl-8 pb-4 space-y-2 animate-fadeIn">
                   <Link
-                    href="/services/interior"
+                    href="/services/binnen-schilderwerk"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
                     Binnen Schilderwerk
                   </Link>
                   <Link
-                    href="/services/exterior"
+                    href="/services/buiten-schilderwerk"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
                     Buiten Schilderwerk
                   </Link>
                   <Link
-                    href="/services/wood-repair"
+                    href="/services/houtrot-reparatie"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
                     Houtrot reparatie
                   </Link>
                   <Link
-                    href="/services/glazing"
+                    href="/services/glaszetten"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
                     Glaszetten
                   </Link>
                   <Link
-                    href="/services/kozijnen"
+                    href="/services/kunststof-kozijnen-plaatsen"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >
                     Kunststof Kozijnen Plaatsen
                   </Link>
                   <Link
-                    href="/services/stucwerk"
+                    href="/services/decoratief-stucwerk"
                     onClick={closeMobileMenu}
                     className="block text-white/80 hover:text-primary transition-colors py-2"
                   >

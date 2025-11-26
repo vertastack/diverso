@@ -15,10 +15,10 @@ const Footer: React.FC = () => {
                 Diverso
               </h4>
               <p className="text-white/80 text-sm leading-relaxed">
-                Schildersbedrijf gevestigd in Zutphen, gespecialiseerd in schilderwerk,
-                restauratie, reparatie van rottend hout, stucwerk,
-                afwerkingswerk aan muren en glaszetten. Meer dan 20
-                jaar ervaring, uw betrouwbare partner en aanspreekpunt voor de beste
+                Schildersbedrijf gevestigd in Zutphen, gespecialiseerd in
+                schilderwerk, restauratie, reparatie van rottend hout, stucwerk,
+                afwerkingswerk aan muren en glaszetten. Meer dan 20 jaar
+                ervaring, uw betrouwbare partner en aanspreekpunt voor de beste
                 schildersdiensten: samen vooruit.
               </p>
             </div>
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/services/interior"
+                    href="/services/binnen-schilderwerk"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Binnen Schilderwerk
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/services/exterior"
+                    href="/services/buiten-schilderwerk"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Buiten Schilderwerk
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/services/wood-repair"
+                    href="/services/houtrot-reparatie"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Houtrot reparatie
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/services/glazing"
+                    href="/services/glaszetten"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Glaszetten
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/services/kozijnen"
+                    href="/services/kunststof-kozijnen-plaatsen"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Kunststof Kozijnen Plaatsen
@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <Link
-                    href="/services/stucwerk"
+                    href="/services/decoratief-stucwerk"
                     className="text-white/70 hover:text-white transition-colors text-sm"
                   >
                     ☑ Decoratief Stucwerk
