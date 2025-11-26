@@ -3,6 +3,7 @@ import Footer from "@/app/shared/components/Footer";
 import SEO from "@/app/shared/components/Seo";
 import HeroCarousel from "@/app/shared/components/HeroCarousel";
 import ContactForm from "@/app/shared/components/ContactForm";
+import Gallery from "@/app/shared/components/Gallery";
 import StrapiService from "@/src/services/strapi.service";
 import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 import type { Metadata } from "next";
@@ -614,48 +615,13 @@ export default async function HomePage() {
 
       {/* Gallery Section */}
       {homeData.galleryProjects && (
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="mb-12">
-              <div className="lg:max-w-2xl">
-                <p className="text-primary text-sm font-semibold uppercase mb-4 tracking-wide">
-                  {homeData.gallerySubtitle}
-                </p>
-                <h2 className="text-3xl md:text-4xl font-bold text-neutral-dark mb-4">
-                  {homeData.galleryTitle}
-                </h2>
-                <p className="text-neutral-charcoal leading-relaxed">
-                  {homeData.galleryDescription}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {homeData.galleryProjects.slice(0, 6).map((project) => (
-                <div
-                  key={project.id}
-                  className="relative overflow-hidden"
-                >
-                  <div className="relative h-64 md:h-80 bg-neutral-gray-light">
-                    <img
-                      src={getImageUrl(project.image)}
-                      alt={getImageAlt(project.image, project.title)}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {homeData.galleryProjects.length > 3 && (
-              <div className="text-center mt-12">
-                <button className="border-2 border-primary text-primary px-8 py-3 font-semibold hover:bg-primary hover:text-white transition-all duration-300">
-                  {homeData.galleryLoadMoreButtonText}
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
+        <Gallery
+          subtitle={homeData.gallerySubtitle}
+          title={homeData.galleryTitle}
+          description={homeData.galleryDescription}
+          loadMoreButtonText={homeData.galleryLoadMoreButtonText}
+          projects={homeData.galleryProjects}
+        />
       )}
 
       <Footer />
