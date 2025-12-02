@@ -153,19 +153,19 @@ const Footer: React.FC = () => {
                 <p className="text-white/70">
                   Tel.:{" "}
                   <a
-                    href="tel:0575540147"
+                    href="tel:1234540147"
                     className="hover:text-white transition-colors"
                   >
-                    0575 - 540 147
+                    1234 - 540 147
                   </a>
                 </p>
                 <p className="text-white/70">
                   E-mail:{" "}
                   <a
-                    href="mailto:info@rsschildersgroep.nl"
+                    href="mailto:info@rtest.nl"
                     className="hover:text-white transition-colors"
                   >
-                    info@rsschildersgroep.nl
+                    info@rtest.nl
                   </a>
                 </p>
               </div>

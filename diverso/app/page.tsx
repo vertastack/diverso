@@ -7,7 +7,6 @@ import Gallery from "@/app/shared/components/Gallery";
 import StrapiService from "@/src/services/strapi.service";
 import { getImageUrl, getImageAlt } from "@/app/shared/utils/image";
 import type { Metadata } from "next";
-
 import Link from "next/link";
 import {
   Phone,
@@ -434,7 +433,7 @@ export default async function HomePage() {
       {/* CTA Section */}
       {homeData.ctaImages && (
         <section className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 h-[250px] md:h-[350px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 h-auto md:h-[350px]">
             {homeData.ctaImages.slice(0, 3).map((slide) => (
               <div key={slide.id} className="relative">
                 <img

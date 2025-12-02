@@ -33,18 +33,18 @@ const Header: React.FC = () => {
             {/* Contact Info */}
             <div className="flex items-center gap-6 text-sm">
               <a
-                href="tel:0575540147"
+                href="tel:1234540147"
                 className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
               >
                 <Phone size={16} className="text-primary" />
-                <span>Bel ons op: 0575 - 540 147</span>
+                <span>Bel ons op: 1234 - 540 147</span>
               </a>
               <a
-                href="mailto:info@rsschildersgroep.nl"
+                href="mailto:info@rtest.nl"
                 className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
               >
                 <Mail size={16} className="text-primary" />
-                <span>info@rsschildersgroep.nl</span>
+                <span>info@rtest.nl</span>
               </a>
             </div>
           </div>
@@ -332,18 +332,18 @@ const Header: React.FC = () => {
               <p>Extended Ooyerhoekseweg 16</p>
               <p>7207 BJ Zutphen</p>
               <a
-                href="tel:0575540147"
+                href="tel:1234540147"
                 className="block hover:text-primary transition-colors"
                 onClick={closeMobileMenu}
               >
-                0575 - 540 147
+                1234 - 540 147
               </a>
               <a
-                href="mailto:info@rsschildersgroep.nl"
+                href="mailto:info@rtest.nl"
                 className="block hover:text-primary transition-colors"
                 onClick={closeMobileMenu}
               >
-                info@rsschildersgroep.nl
+                info@rtest.nl
               </a>
             </div>
           </div>
