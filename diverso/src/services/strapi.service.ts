@@ -151,7 +151,6 @@ class StrapiService {
       const response = await fetch(url, {
         method: "GET",
         headers: this.defaultHeaders,
-        cache: "no-store",
       });
 
       if (!response.ok) {
