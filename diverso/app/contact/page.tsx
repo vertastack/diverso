@@ -44,6 +44,8 @@ interface ContactData {
   ctaSubtext: string;
 }
 
+export const dynamic = "force-dynamic";
+
 export default function ContactPage() {
   const [contactData, setContactData] = useState<ContactData | null>(null);
 
