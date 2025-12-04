@@ -137,6 +137,8 @@ const DecoratiefStucwerkSlider = ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function DecoratiefStucwerkPage() {
   const decoratiefStucwerkData = await getDecoratiefStucwerkData();
 

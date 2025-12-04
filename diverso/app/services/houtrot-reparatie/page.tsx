@@ -137,6 +137,8 @@ const HoutrotReparatieSlider = ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function HoutrotReparatiePage() {
   const houtrotReparatieData = await getHoutrotReparatieData();
 

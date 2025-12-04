@@ -139,6 +139,8 @@ const KunststofKozijnenPlaatsenSlider = ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function KunststofKozijnenPlaatsenPage() {
   const kunststofKozijnenPlaatsenData =
     await getKunststofKozijnenPlaatsenData();

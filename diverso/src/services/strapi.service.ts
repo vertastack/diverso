@@ -62,7 +62,7 @@ class StrapiService {
 
   private buildUrl(
     contentType: string,
-    queryParams: Record<string, any> = {}
+    queryParams: Record<string, any> = {},
   ): string {
     const queryString = qs.stringify(queryParams, {
       encodeValuesOnly: true, // Don't encode keys like pagination[page]
@@ -110,7 +110,7 @@ class StrapiService {
    */
   async getContent<T>(
     contentType: string,
-    options: ContentOptions = {}
+    options: ContentOptions = {},
   ): Promise<StrapiResponse<T>> {
     const {
       id = null,
@@ -151,11 +151,12 @@ class StrapiService {
       const response = await fetch(url, {
         method: "GET",
         headers: this.defaultHeaders,
+        cache: "no-store",
       });
 
       if (!response.ok) {
         throw new Error(
-          `Error fetching from Strapi: ${response.status} ${response.statusText}`
+          `Error fetching from Strapi: ${response.status} ${response.statusText}`,
         );
       }
       const res = await response.json();

@@ -137,6 +137,8 @@ const BuitenSchilderwerkSlider = ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function BuitenSchilderwerkPage() {
   const buitenSchilderwerkData = await getBuitenSchilderwerkData();
 

@@ -161,6 +161,8 @@ interface HomeData {
   galleryProjects: Project[];
 }
 
+export const dynamic = "force-dynamic";
+
 async function getHomeData(): Promise<HomeData | null> {
   try {
     const strapiService = new StrapiService();
@@ -464,7 +466,9 @@ export default async function HomePage() {
                       {homeData.ctaPhoneNumber}
                     </a>
                   </div>
-                  <span className="text-sm md:text-base">{homeData.ctaOrText}</span>
+                  <span className="text-sm md:text-base">
+                    {homeData.ctaOrText}
+                  </span>
                   <button className="bg-transparent hover:bg-white hover:text-primary border-2 border-white text-white px-4 md:px-6 py-2 md:py-3 font-semibold transition-all duration-300 underline text-sm md:text-base">
                     {homeData.ctaButtonText}
                   </button>
@@ -504,7 +508,7 @@ export default async function HomePage() {
                             src={getImageUrl(testimonial.avatar)}
                             alt={getImageAlt(
                               testimonial.avatar,
-                              testimonial.name
+                              testimonial.name,
                             )}
                             className="w-full h-full object-cover"
                           />
